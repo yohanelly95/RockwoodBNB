@@ -1,10 +1,14 @@
-# RockwoodBNB
-Rockwood BNB website
+# RockwoodBNB website codebase
+The website code that powers rockwoodbnb.com
 
-Install:
+## Instructions
 
--clone repo
--npm i
--next (dev)
--next build (for production build)
--next start (production)
+* Clone repository
+
+* npm i
+
+* next (dev build)
+
+* next build (prod build)
+
+* next start (prod server)
