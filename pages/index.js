@@ -1,9 +1,14 @@
-import React, {useState, useEffect, useRef }from 'react';
+import Nav from '../components/nav'
 
-
-
-function HomePage() {
-    return <div>Welcome Bitchesss</div>
-  }
-  
-  export default HomePage
+export default function IndexPage() {
+  return (
+    <div>
+      <Nav />
+      <div className="py-20">
+        <h1 className="text-5xl text-center text-accent-1">
+          Bitcheszzz
+        </h1>
+      </div>
+    </div>
+  )
+}
