@@ -5,6 +5,9 @@ module.exports = {
       colors: {
         'accent-1': '#333',
       },
+      fontFamily: {
+        'primary': ['Poppins', 'sans-serif'],
+    }
     },
   },
   variants: {},
