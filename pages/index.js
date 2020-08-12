@@ -1,7 +1,11 @@
+import { DefaultLayout } from "../components"
+
 export default function IndexPage() {
   return (
-      <div className="">
-        <h1>Home</h1>
-      </div>    
+      <DefaultLayout>
+        <div className="">
+          <h1>Content</h1>
+        </div> 
+      </DefaultLayout>   
   )
 }

@@ -1,10 +1,10 @@
-import Footer from './Footer';
-import Header from './Header';
+import Footer from '../common/Footer';
+import Nav from '../common/Nav';
 
 const DefaultLayout = ({ wrapperClass, title, children }) => (
   <div className={wrapperClass}>
     <title>{title}</title>
-    <Header />
+    <Nav />
     {children}
     <Footer />
   </div>
