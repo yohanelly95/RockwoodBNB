@@ -1,9 +1,9 @@
 import Link from 'next/link'
 
-const links = [
-  { href: '', label: 'Link' },
-  { href: '', label: 'Docs' },
-]
+// const links = [
+//   { href: '', label: 'Link' },
+//   { href: '', label: 'Docs' },
+// ]
 
 export default function Nav() {
   return (
@@ -15,19 +15,19 @@ export default function Nav() {
           </Link>
         </li>
         <li>
-          <Link href="/">
+          <Link href="/Gallery" as="gallery">
             <a className="text-blue-500 no-underline">Gallery</a>
           </Link>
         </li>
-        <ul className="flex justify-between items-center space-x-4">
+        {/* <ul className="flex justify-between items-center space-x-4">
           {links.map(({ href, label }) => (
             <li key={`${href}${label}`}>
-              <a href={href} className="btn-blue no-underline">
+              <a href={href} className="">
                 {label}
               </a>
             </li>
           ))}
-        </ul>
+        </ul> */}
       </ul>
     </nav>
   )

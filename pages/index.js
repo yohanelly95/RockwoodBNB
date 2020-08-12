@@ -1,14 +1,11 @@
-import Nav from '../components/nav'
+import { DefaultLayout } from "../components"
 
 export default function IndexPage() {
   return (
-    <div>
-      <Nav />
-      <div className="py-20">
-        <h1 className="text-5xl text-center text-accent-1">
-          Bitcheszzz
-        </h1>
-      </div>
-    </div>
+      <DefaultLayout>
+        <div className="">
+          <h1>Content</h1>
+        </div> 
+      </DefaultLayout>   
   )
 }
