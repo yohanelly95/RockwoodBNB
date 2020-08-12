@@ -17,7 +17,7 @@ const Footer = () => (
       >
         <img
           className="footer-logo"
-          src="/images/logo-prismic.svg"
+          src="/dino.svg"
           alt="Gray Prismic logo"
         />
       </a>
