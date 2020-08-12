@@ -1,9 +1,35 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,700;1,400;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* Typography */
 
 body {
-  @apply bg-blue-200 p-12 font-primary;
+  @apply bg-gray-600 font-primary;
 }
 
 h1 {
-  @apply text-4xl;
+  @apply text-5xl font-semibold;
+}
+
+h2 {
+  @apply text-3xl font-bold;
+}
+
+p {
+  @apply text-sm font-normal;
+}
+
+/* CTAs & Buttons */
+
+.btn-primary {
+  @apply rounded-full border-2 border-black bg-black py-1 px-6 text-white text-sm;
+}
+
+.btn-secondary {
+  @apply rounded-full border-2 border-gray-400 py-1 px-6 text-gray-600 text-sm;
+}
+
+/* Layout */
+
+.container {
+  @apply px-4 mx-auto my-0;
 }
