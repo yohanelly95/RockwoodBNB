@@ -7,4 +7,12 @@
 
 @import "tailwindcss/utilities";
 
-
+.date-dropdown{
+    background-color: #FFFFFF;
+    border: 1px solid #D7D7D7;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.18);
+    width: 290px;
+    left: 24px;
+    z-index: 100;
+}
