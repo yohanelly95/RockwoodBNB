@@ -7,7 +7,7 @@ export default function TripSelector() {
         <div className="w-1/2 h-16 px-8 bg-gray-200 rounded-full">
 
         </div>
-        <Link href="/Gallery" as="gallery">
+        <Link href="/rooms">
             <a className="bg-black py-3 px-6 rounded-full ml-4"><img src={RightArrow} className="h-10 w-10"></img></a>
         </Link>
     </div>
