@@ -3,7 +3,7 @@
 /* Typography */
 
 body {
-  @apply bg-gray-600 font-primary;
+  @apply bg-white font-primary;
 }
 
 h1 {
@@ -28,8 +28,34 @@ p {
   @apply rounded-full border-2 border-gray-400 py-1 px-6 text-gray-600 text-sm;
 }
 
+.btn-date {
+  @apply py-3 w-40 uppercase text-left;
+}
+
+.dropdown::after {
+  content: '';
+  background-image: url('../../public/assets/icons/chevron-down.svg');
+  height: 24px;
+  width: 24px;
+  position: absolute;
+  background-size: contain; 
+  right: 16px;
+}
+
 /* Layout */
 
 .container {
   @apply px-4 mx-auto my-0;
+}
+
+/* Custom elements */
+
+.date-dropdown{
+  background-color: #FFFFFF;
+  border: 1px solid #D7D7D7;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.18);
+  width: 290px;
+  left: 24px;
+  z-index: 100;
 }
