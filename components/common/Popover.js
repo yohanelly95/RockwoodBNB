@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from 'react';
-
+import React, { useEffect, useRef } from "react";
 
 /* USAGE: 
     <PopOver
@@ -21,43 +20,48 @@ import React, { useEffect, useRef } from 'react';
 }*/
 
 const PopOver = (props) => {
-    const popoverRef = useRef();
+  const popoverRef = useRef();
 
-    useEffect(() => {
-        document.body.addEventListener('click', clickListener, true);
-        return () => {document.body.removeEventListener('click', clickListener, true);}
-    }, [props.isPopoverOpen]);
-
-    const clickListener = (event) => {
-        let { togglePopOver, popoverSrcClassNames = [] } = props;
-        const currentDropRef = popoverRef.current;
-        let isSourceParent = false;
-        const targetClassArray = event.target.className.split(' ');
-        targetClassArray.forEach((targetClass) => {
-            if(popoverSrcClassNames.includes(targetClass)) {
-                isSourceParent = true;
-                return ;
-            }
-        });
-        const isSourcePopover = currentDropRef && currentDropRef.contains && currentDropRef.contains(event.target);
-        // if clicked source is parent or the popover-content, do not toggle dropdown.
-        if(!currentDropRef || isSourceParent || isSourcePopover) {
-            return;
-        }
-        togglePopOver(event);
+  useEffect(() => {
+    document.body.addEventListener("click", clickListener, true);
+    return () => {
+      document.body.removeEventListener("click", clickListener, true);
     };
+  }, [props.isPopoverOpen]);
 
-    const { isPopoverOpen = false, className = '' } = props;
+  const clickListener = (event) => {
+    let { togglePopOver, popoverSrcClassNames = [] } = props;
+    const currentDropRef = popoverRef.current;
+    let isSourceParent = false;
+    const targetClassArray = event.target.className.split(" ");
+    targetClassArray.forEach((targetClass) => {
+      if (popoverSrcClassNames.includes(targetClass)) {
+        isSourceParent = true;
+        return;
+      }
+    });
+    const isSourcePopover =
+      currentDropRef &&
+      currentDropRef.contains &&
+      currentDropRef.contains(event.target);
+    // if clicked source is parent or the popover-content, do not toggle dropdown.
+    if (!currentDropRef || isSourceParent || isSourcePopover) {
+      return;
+    }
+    togglePopOver(event);
+  };
 
-    return (
-        <React.Fragment>
-            {isPopoverOpen &&
-                <div className={className + ' popover'} ref={popoverRef}>
-                    {props.children}
-                </div>
-            }
-        </React.Fragment>
-    );
+  const { isPopoverOpen = false, className = "" } = props;
+
+  return (
+    <React.Fragment>
+      {isPopoverOpen && (
+        <div className={className + " popover"} ref={popoverRef}>
+          {props.children}
+        </div>
+      )}
+    </React.Fragment>
+  );
 };
 
 export default PopOver;

@@ -1,49 +1,20 @@
-import { useState, useEffect, useRef } from 'react';
-import { DefaultLayout } from '../components';
-import CalendarComponent from '../components/calendar';
-import Popover from '../components/common/Popover';
-
+import { TripSelector } from '../components'
 
 export default function IndexPage() {
-
-  const [openCalendar, setOpenCalendar] = useState(false);
-  const [showSelectedFromDate, setShowSelectedFromDate] = useState('');
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-
-  const toggleCalendar = () => {
-    setOpenCalendar((openCalendar) => !openCalendar);
-  }
-
-  const togglePopOver = (event) => {
-    setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
-};
-
-  const getCalendarDate = (value) => {
-    console.log(value);
-    setShowSelectedFromDate(value);
-  }
-  
-
   return (
-      <DefaultLayout>
-        <div className="container mx-auto flex lg:flex-col">
-          <h1 className="p-2 bg-white md:flex-shrink-0">Welcome to Rockwoodbnb</h1>
-          <button className="from-date-btn" onClick={togglePopOver} style={{margin: '100px'}}>Click</button>
-          {
-            isPopoverOpen &&
-            <Popover 
-              popoverSrcClassNames={['from-date-btn']}
-              className="date-dropdown"
-              togglePopOver={togglePopOver}
-              isPopoverOpen={isPopoverOpen}
-            >
-              <CalendarComponent
-              getCalendarDate={getCalendarDate}
-              />
-            </Popover>
-          }
-          Date selected <span>{showSelectedFromDate}</span>
-        </div> 
-      </DefaultLayout>   
-  )
+    <div className="container">
+      <img className="w-100 fixed top-0 left-0 -z-10" src="/assets/img/bg.jpg"></img>
+      <div className="flex flex-col h-screen">
+        <div className="flex items-center justify-center mt-10">
+          <img className="w-56" src="../assets/img/rockwood-logo.svg"></img>
+        </div>
+        <div className="m-auto transform -translate-y-full w-full">
+          <h1 className="text-center">welcome to rockwood bnb</h1>
+          <div className="mt-6">
+            <TripSelector />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
