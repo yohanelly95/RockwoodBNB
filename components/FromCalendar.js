@@ -10,9 +10,17 @@ const FromCalendarComponent = (props) => {
     useEffect(() => {
         const { getFromCalendarDate } = props;
         const showSelectedFromDate = fromDate === '' ? "" : moment(fromDate).format('DD/MM/YYYY');
-        getFromCalendarDate(showSelectedFromDate);
+        getFromCalendarDate(showSelectedFromDate, fromDate);
+        setDate();
     }, [fromDate]);
 
+    const setDate = () =>{
+        const { toggleNextPopover } = props;
+        if(fromDate){
+            toggleNextPopover('from');
+        }
+        
+    }
 
     return(
         <React.Fragment>

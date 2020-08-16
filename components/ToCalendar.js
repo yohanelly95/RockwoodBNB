@@ -6,25 +6,30 @@ const ToCalendarComponent = (props) => {
 
     const [toDate, setToDate] = useState('');
 
-    
-    useEffect(() => {
-        const { getToCalendarDate } = props;
-        const showSelectedToDate = toDate === '' ? "" : moment(toDate).format('DD/MM/YYYY');
-        getToCalendarDate(showSelectedToDate);
-    }, [toDate]);
+
+    const toggleCallback = (value) => {
+        const { toggleNextPopover, getToCalendarDate } = props;
+        const showSelectedToDate = value === '' ? "" : moment(value).format('DD/MM/YYYY');
+        getToCalendarDate(showSelectedToDate, value);
+        toggleNextPopover('to');
+    }
 
 
-
+    const { fromDateObj } = props; //get minDate
     return(
         <React.Fragment>
             <Calendar
                 onChange={setToDate}
                 value={toDate}
-                minDate={new Date()}
+                minDate={new Date(fromDateObj)}
                 showNeighboringMonth={true}
                 maxDetail="month"
                 next2Label={null}
                 prev2Label={null}
+                defaultValue={new Date(fromDateObj)}
+                selectRange={true}
+                allowPartialRange={true}
+                onClickDay={toggleCallback}
             />
         </React.Fragment>
     )
