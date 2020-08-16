@@ -50,6 +50,7 @@ export default function TripSelector() {
               onClick={toggleFromPopOver}
             >
               { showSelectedFromDate ? showSelectedFromDate : "From" }
+              <img src="chevron.svg" className={isFromPopoverOpen ? "chevron chevron-rotate": "chevron"}/>
             </button>
             {isFromPopoverOpen && (
               <Popover
@@ -68,6 +69,7 @@ export default function TripSelector() {
               onClick={toggleToPopOver}
             >
               { showSelectedToDate ? showSelectedToDate : "To" }
+              <img src="chevron.svg" className={isToPopoverOpen ? "chevron chevron-rotate": "chevron"}/>
             </button>
             {isToPopoverOpen && (
               <Popover

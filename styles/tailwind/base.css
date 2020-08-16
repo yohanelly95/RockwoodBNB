@@ -29,21 +29,20 @@ p {
 }
 
 .btn-date {
-  @apply py-3 w-40 uppercase text-left;
+  @apply py-3 w-40 uppercase text-left flex items-center justify-between;
 }
 
 .btn-date:focus{
   @apply outline-none
 }
 
-.dropdown::after {
-  content: '';
-  background-image: url('../../public/assets/icons/chevron-down.svg');
-  height: 24px;
+.chevron{
   width: 24px;
-  position: absolute;
-  background-size: contain; 
-  right: 16px;
+  margin-right: 24px;
+}
+
+.chevron-rotate{
+  transform: rotate(180deg);
 }
 
 
