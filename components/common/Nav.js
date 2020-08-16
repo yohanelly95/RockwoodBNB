@@ -8,12 +8,12 @@ import TripSelector from './TripSelector'
 
 export default function Nav() {
   return (
-    <nav className="flex h-24">
+    <nav className="flex h-24 border-b-2 border-gray-200">
       <Link href="/" className="self-start">
         <img
           className="cursor-pointer"
           src="/assets/img/logo-sm.svg"
-          alt="Gray Prismic logo"
+          alt="logo"
         />
       </Link>
       <div className="self-center w-full">
