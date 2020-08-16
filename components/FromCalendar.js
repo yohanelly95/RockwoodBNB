@@ -9,7 +9,7 @@ const FromCalendarComponent = (props) => {
     
     useEffect(() => {
         const { getFromCalendarDate } = props;
-        const showSelectedFromDate = fromDate === '' ? "" : moment(fromDate).format('DD/MM/YYYY');
+        const showSelectedFromDate = fromDate === '' ? "" : moment(fromDate).format('MMM Do');
         getFromCalendarDate(showSelectedFromDate, fromDate);
         setDate();
     }, [fromDate]);

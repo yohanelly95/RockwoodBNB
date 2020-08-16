@@ -97,3 +97,8 @@ p {
 .react-calendar--selectRange .react-calendar__tile--hover{
   background-color: #FF8FD8 !important;
 }
+
+.guest-room-list{
+  padding: 12px;
+  cursor: pointer;
+}

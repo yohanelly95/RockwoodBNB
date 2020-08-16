@@ -9,7 +9,7 @@ const ToCalendarComponent = (props) => {
 
     const toggleCallback = (value) => {
         const { toggleNextPopover, getToCalendarDate } = props;
-        const showSelectedToDate = value === '' ? "" : moment(value).format('DD/MM/YYYY');
+        const showSelectedToDate = value === '' ? "" : moment(value).format('MMM Do');
         getToCalendarDate(showSelectedToDate, value);
         toggleNextPopover('to');
     }
