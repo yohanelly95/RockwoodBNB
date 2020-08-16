@@ -76,7 +76,7 @@ export default function TripSelector() {
                 togglePopOver={toggleToPopOver}
                 isPopoverOpen={isToPopoverOpen}
               >
-                <ToCalendarComponent getToCalendarDate={getToCalendarDate} fromDateObj={fromDateObj} toggleNextPopover={toggleNextPopover}/>
+                <ToCalendarComponent getToCalendarDate={getToCalendarDate} fromDateObj={fromDateObj || new Date()} toggleNextPopover={toggleNextPopover}/>
               </Popover>
             )}
           </div>
@@ -84,7 +84,7 @@ export default function TripSelector() {
         <Link href="/rooms">
           <a className="bg-black py-2 px-6 rounded-full ml-4">
             <img
-              src="../../assets/icons/arrow-right.svg"
+              src="arrow-right.svg"
               className="h-8 w-8"
             ></img>
           </a>
