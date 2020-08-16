@@ -11,7 +11,10 @@ export default function TripSelector() {
   const [showSelectedToDate, setShowSelectedToDate] = useState("");
   const [isToPopoverOpen, setIsToPopoverOpen] = useState(false);
   const [ToDateObj, setToDateObj] = useState('');
-
+  const [isGuestPopoverOpen, setIsGuestPopoverOpen] = useState(false);
+  const [numberOfGuest, setNumberOfGuest] = useState('');
+  const [isRoomPopoverOpen, setIsRoomPopoverOpen] = useState(false);
+  const [numberOfRooms, setNumberOfRooms] = useState('');
 
   const toggleFromPopOver = (event) => {
     setIsFromPopoverOpen((isFromPopoverOpen) => !isFromPopoverOpen);
@@ -39,6 +42,14 @@ export default function TripSelector() {
     setShowSelectedToDate(value);
     setToDateObj(dateObj);
   };
+
+  const toggleGuestPopover = () => {
+    setIsGuestPopoverOpen((isGuestPopoverOpen) => !isGuestPopoverOpen);
+  }
+
+  const toggleRoomPopover = () => {
+    setIsRoomPopoverOpen((isRoomPopoverOpen) => !isRoomPopoverOpen);
+  }
 
   return (
     <div className="">
@@ -79,6 +90,44 @@ export default function TripSelector() {
                 isPopoverOpen={isToPopoverOpen}
               >
                 <ToCalendarComponent getToCalendarDate={getToCalendarDate} fromDateObj={fromDateObj || new Date()} toggleNextPopover={toggleNextPopover}/>
+              </Popover>
+            )}
+          </div>
+          <div className="flex flex-col w-32">
+            <button
+              className="btn-guest-room dropdown relative btn-guest"
+              onClick={toggleGuestPopover}
+            >
+              { numberOfGuest ? numberOfGuest : "Guests" }
+              <img src="chevron.svg" className={isGuestPopoverOpen ? "chevron chevron-rotate": "chevron"}/>
+            </button>
+            {isGuestPopoverOpen && (
+              <Popover
+                popoverSrcClassNames={["btn-guest"]}
+                className="guest-rooms-dropdown"
+                togglePopOver={toggleGuestPopover}
+                isPopoverOpen={isGuestPopoverOpen}
+              >
+              Triggered
+              </Popover>
+            )}
+          </div>
+          <div className="flex flex-col w-32">
+            <button
+              className="btn-guest-room dropdown relative btn-rooms"
+              onClick={toggleRoomPopover}
+            >
+              { numberOfRooms ? numberOfRooms : "Rooms" }
+              <img src="chevron.svg" className={isRoomPopoverOpen ? "chevron chevron-rotate": "chevron"}/>
+            </button>
+            {isRoomPopoverOpen && (
+              <Popover
+                popoverSrcClassNames={["btn-rooms"]}
+                className="guest-rooms-dropdown"
+                togglePopOver={toggleRoomPopover}
+                isPopoverOpen={isRoomPopoverOpen}
+              >
+              Triggered
               </Popover>
             )}
           </div>
