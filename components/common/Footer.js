@@ -7,9 +7,9 @@ const Footer = () => (
         <img className="w-56" src="../assets/img/rockwood-logo-blk.svg"></img>
       </div>
       <div className="w-3/4 h-16 flex justify-evenly items-center">
-        <Link href="/">Facebook</Link>
-        <Link href="/">Whatsapp</Link>
-        <Link href="/">About the team</Link>
+        <Link href="/"><a>Facebook</a></Link>
+        <Link href="/"><a>Whatsapp</a></Link>
+        <Link href="/"><a>About the team</a></Link>
       </div>
     </div>
   </footer>

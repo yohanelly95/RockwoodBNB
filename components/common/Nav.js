@@ -13,7 +13,7 @@ export default function Nav() {
         <img
           className="cursor-pointer"
           src="/assets/img/logo-sm.svg"
-          alt="Gray Prismic logo"
+          alt="logo"
         />
       </Link>
       <div className="self-center w-full">
