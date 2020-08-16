@@ -1,5 +1,6 @@
 import { TripSelector } from '../components'
 
+
 export default function IndexPage() {
   return (
     <div className="container">
@@ -12,6 +13,7 @@ export default function IndexPage() {
           <h1 className="text-center">welcome to rockwood bnb</h1>
           <div className="mt-6">
             <TripSelector />
+
           </div>
         </div>
       </div>
