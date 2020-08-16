@@ -32,6 +32,10 @@ p {
   @apply py-3 w-40 uppercase text-left;
 }
 
+.btn-date:focus{
+  @apply outline-none
+}
+
 .dropdown::after {
   content: '';
   background-image: url('../../public/assets/icons/chevron-down.svg');
@@ -41,6 +45,7 @@ p {
   background-size: contain; 
   right: 16px;
 }
+
 
 /* Layout */
 
