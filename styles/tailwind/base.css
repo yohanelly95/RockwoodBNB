@@ -64,3 +64,7 @@ p {
   left: 24px;
   z-index: 100;
 }
+
+.react-calendar--selectRange .react-calendar__tile--hover{
+  background-color: #FF8FD8 !important;
+}
