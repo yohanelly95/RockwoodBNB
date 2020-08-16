@@ -32,7 +32,14 @@ p {
   @apply py-3 w-40 uppercase text-left flex items-center justify-between;
 }
 
+.btn-guest-room{
+    @apply py-3 w-32 uppercase text-left flex items-center justify-between;
+}
+
 .btn-date:focus{
+  @apply outline-none
+}
+.btn-guest-room:focus{
   @apply outline-none
 }
 
@@ -54,6 +61,19 @@ p {
 
 /* Custom elements */
 
+/* .dropdown-container::after{
+  content: '';
+    display: inline-flex;
+    background: #888;
+    height: 18px;
+    position: relative;
+    width: 1px;
+    vertical-align: middle;
+    float: right;
+    right: -140px;
+    top: -33px;
+} */
+
 .date-dropdown{
   background-color: #FFFFFF;
   border: 1px solid #D7D7D7;
@@ -62,6 +82,16 @@ p {
   width: 290px;
   left: 24px;
   z-index: 100;
+}
+
+.guest-rooms-dropdown{
+    background-color: #FFFFFF;
+    border: 1px solid #D7D7D7;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.18);
+    width: 140px;
+    left: 24px;
+    z-index: 100;
 }
 
 .react-calendar--selectRange .react-calendar__tile--hover{
