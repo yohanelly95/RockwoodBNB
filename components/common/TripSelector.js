@@ -10,11 +10,14 @@ export default function TripSelector() {
   const [isFromPopoverOpen, setIsFromPopoverOpen] = useState(false);
   const [showSelectedToDate, setShowSelectedToDate] = useState("");
   const [isToPopoverOpen, setIsToPopoverOpen] = useState(false);
-  const [ToDateObj, setToDateObj] = useState('');
+  const [toDateObj, setToDateObj] = useState('');
   const [isGuestPopoverOpen, setIsGuestPopoverOpen] = useState(false);
   const [numberOfGuest, setNumberOfGuest] = useState('');
   const [isRoomPopoverOpen, setIsRoomPopoverOpen] = useState(false);
   const [numberOfRooms, setNumberOfRooms] = useState('');
+  const guestArr = [1,2,3,4,5,6,7,8,9,10];
+  const roomsArr = [1,2,3,4,5,6];
+
 
   const toggleFromPopOver = (event) => {
     setIsFromPopoverOpen((isFromPopoverOpen) => !isFromPopoverOpen);
@@ -108,7 +111,11 @@ export default function TripSelector() {
                 togglePopOver={toggleGuestPopover}
                 isPopoverOpen={isGuestPopoverOpen}
               >
-              Triggered
+              <ul>
+                {guestArr.map((value, index) => {
+                  return <li className="guest-room-list" key={index} onClick={() => setNumberOfGuest(value)}>{value}</li>
+                })}
+              </ul>
               </Popover>
             )}
           </div>
@@ -127,7 +134,11 @@ export default function TripSelector() {
                 togglePopOver={toggleRoomPopover}
                 isPopoverOpen={isRoomPopoverOpen}
               >
-              Triggered
+              <ul>
+                {roomsArr.map((value, index) => {
+                  return <li className="guest-room-list" key={index} onClick={() => setNumberOfRooms(value)}>{value}</li>
+                })}
+              </ul>
               </Popover>
             )}
           </div>
