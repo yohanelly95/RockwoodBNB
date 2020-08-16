@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { useState } from 'react';
-import CalendarComponent from '../calendar';
+import FromCalendarComponent from '../FromCalendar';
+import ToCalendarComponent from '../ToCalendar';
 import Popover from './Popover';
 
 export default function TripSelector() {
@@ -11,7 +12,7 @@ export default function TripSelector() {
     setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
   };
 
-  const getCalendarDate = (value) => {
+  const getFromCalendarDate = (value) => {
     setShowSelectedFromDate(value);
   };
 
@@ -33,7 +34,7 @@ export default function TripSelector() {
                 togglePopOver={togglePopOver}
                 isPopoverOpen={isPopoverOpen}
               >
-                <CalendarComponent getCalendarDate={getCalendarDate} />
+                <FromCalendarComponent getFromCalendarDate={getFromCalendarDate} />
               </Popover>
             )}
           </div>

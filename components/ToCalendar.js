@@ -2,24 +2,24 @@ import { useState, useEffect, useRef } from 'react';
 import Calendar from 'react-calendar';
 import moment from 'moment';
 
-const CalendarComponent = (props) => {
+const ToCalendarComponent = (props) => {
 
-    const [fromDate, setFromDate] = useState('');
+    const [toDate, setToDate] = useState('');
 
-
+    
     useEffect(() => {
         const { getCalendarDate } = props;
-        const showSelectedFromDate = fromDate === '' ? "" : moment(fromDate).format('DD/MM/YYYY');
-        getCalendarDate(showSelectedFromDate);
-    }, [fromDate]);
+        const showSelectedToDate = toDate === '' ? "" : moment(toDate).format('DD/MM/YYYY');
+        getCalendarDate(showSelectedToDate);
+    }, [toDate]);
 
 
 
     return(
         <React.Fragment>
             <Calendar
-                onChange={setFromDate}
-                value={fromDate}
+                onChange={setToDate}
+                value={toDate}
                 minDate={new Date()}
                 showNeighboringMonth={true}
                 maxDetail="month"
@@ -30,4 +30,4 @@ const CalendarComponent = (props) => {
     )
 }
 
-export default CalendarComponent;
+export default ToCalendarComponent;
