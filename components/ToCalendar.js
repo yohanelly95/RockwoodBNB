@@ -8,9 +8,9 @@ const ToCalendarComponent = (props) => {
 
     
     useEffect(() => {
-        const { getCalendarDate } = props;
+        const { getToCalendarDate } = props;
         const showSelectedToDate = toDate === '' ? "" : moment(toDate).format('DD/MM/YYYY');
-        getCalendarDate(showSelectedToDate);
+        getToCalendarDate(showSelectedToDate);
     }, [toDate]);
 
 

@@ -6,14 +6,24 @@ import Popover from './Popover';
 
 export default function TripSelector() {
   const [showSelectedFromDate, setShowSelectedFromDate] = useState("");
-  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const [isFromPopoverOpen, setIsFromPopoverOpen] = useState(false);
+  const [showSelectedToDate, setShowSelectedToDate] = useState("");
+  const [isToPopoverOpen, setIsToPopoverOpen] = useState(false);
 
-  const togglePopOver = (event) => {
-    setIsPopoverOpen((isPopoverOpen) => !isPopoverOpen);
+  const toggleFromPopOver = (event) => {
+    setIsFromPopoverOpen((isFromPopoverOpen) => !isFromPopoverOpen);
   };
 
   const getFromCalendarDate = (value) => {
     setShowSelectedFromDate(value);
+  };
+
+  const toggleToPopOver = (event) => {
+    setIsToPopoverOpen((isToPopoverOpen) => !isToPopoverOpen);
+  };
+
+  const getToCalendarDate = (value) => {
+    setShowSelectedToDate(value);
   };
 
   return (
@@ -23,39 +33,39 @@ export default function TripSelector() {
           <div className="flex flex-col w-40">
             <button
               className="btn-date dropdown relative"
-              onClick={togglePopOver}
+              onClick={toggleFromPopOver}
             >
               { showSelectedFromDate ? showSelectedFromDate : "From" }
             </button>
-            {isPopoverOpen && (
+            {isFromPopoverOpen && (
               <Popover
                 popoverSrcClassNames={["btn-date"]}
                 className="date-dropdown"
-                togglePopOver={togglePopOver}
-                isPopoverOpen={isPopoverOpen}
+                togglePopOver={toggleFromPopOver}
+                isPopoverOpen={isFromPopoverOpen}
               >
                 <FromCalendarComponent getFromCalendarDate={getFromCalendarDate} />
               </Popover>
             )}
           </div>
-          {/* <div className="flex flex-col w-40">
+          <div className="flex flex-col w-40">
             <button
               className="btn-date dropdown relative"
-              onClick={togglePopOver}
+              onClick={toggleToPopOver}
             >
-              { showSelectedFromDate ? showSelectedFromDate : "To" }
+              { showSelectedToDate ? showSelectedToDate : "To" }
             </button>
-            {isPopoverOpen && (
+            {isToPopoverOpen && (
               <Popover
                 popoverSrcClassNames={["btn-date"]}
                 className="date-dropdown"
-                togglePopOver={togglePopOver}
-                isPopoverOpen={isPopoverOpen}
+                togglePopOver={toggleToPopOver}
+                isPopoverOpen={isToPopoverOpen}
               >
-                <CalendarComponent getCalendarDate={getCalendarDate} />
+                <ToCalendarComponent getToCalendarDate={getToCalendarDate} />
               </Popover>
             )}
-          </div> */}
+          </div>
         </div>
         <Link href="/rooms">
           <a className="bg-black py-2 px-6 rounded-full ml-4">

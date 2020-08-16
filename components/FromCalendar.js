@@ -14,7 +14,6 @@ const FromCalendarComponent = (props) => {
     }, [fromDate]);
 
 
-
     return(
         <React.Fragment>
             <Calendar
