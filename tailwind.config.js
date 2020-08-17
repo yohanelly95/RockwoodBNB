@@ -1,18 +1,26 @@
 module.exports = {
-  purge: ['./components/**/*.{js,ts,jsx,tsx}', './pages/**/*.{js,ts,jsx,tsx}'],
+  purge: ["./components/**/*.{js,ts,jsx,tsx}", "./pages/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    zIndex: {
-      '-10': '-10',
-    },
     extend: {
       colors: {
-        'accent-1': '#333',
+        "accent-1": "#333",
       },
       fontFamily: {
-        'primary': ['Poppins', 'sans-serif'],
-    }
+        primary: ["Poppins", "sans-serif"],
+      },
+      borderRadius: {
+        'xl': '1.25rem',
+        '2xl': '2rem',
+      },
+      zIndex: {
+        '-10': '-10',
+      },
+      width: {
+        '96': '24rem',
+        '128': '32rem',
+      }
     },
   },
   variants: {},
   plugins: [],
-}
+};

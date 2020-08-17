@@ -19,3 +19,7 @@ h3 {
 p {
   @apply text-sm font-normal;
 }
+
+button:focus {
+  @apply outline-none;
+}
