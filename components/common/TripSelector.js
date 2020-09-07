@@ -18,7 +18,6 @@ export default function TripSelector(props) {
   const [numberOfGuest, setNumberOfGuest] = useState('');
   const [isRoomPopoverOpen, setIsRoomPopoverOpen] = useState(false);
   const [numberOfRooms, setNumberOfRooms] = useState('');
-  const [isOnNav, setIsOnNav] = useState(false);
   const [minRoomsReq, setMinRoomsReq] = useState([]);
   let guestArr = [1,2,3,4,5,6,7,8,9,10];
   let roomsArr = [1,2,3,4,5,6];
@@ -35,7 +34,6 @@ export default function TripSelector(props) {
       setShowSelectedToDate(moment(toDate).format('MMM Do'));
       setNumberOfGuest(guestCount);
       setNumberOfRooms(roomCount);
-      setIsOnNav(true);
     }
   }, [router]);
 
@@ -103,7 +101,7 @@ export default function TripSelector(props) {
                 togglePopOver={toggleFromPopOver}
                 isPopoverOpen={isFromPopoverOpen}
               >
-                <FromCalendarComponent getFromCalendarDate={getFromCalendarDate} toggleNextPopover={toggleNextPopover} initialDate={router.query.from || ''} isOnNav={isOnNav} />
+                <FromCalendarComponent getFromCalendarDate={getFromCalendarDate} toggleNextPopover={toggleNextPopover} initialDate={router.query.from || ''} />
               </Popover>
             )}
           </div>
