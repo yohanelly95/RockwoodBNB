@@ -21,6 +21,7 @@
   "homepage": "https://github.com/yohanelly95/RockwoodBNB#readme",
   "dependencies": {
     "crypto-js": "^4.0.0",
+    "get-sheet-done": "^0.1.5",
     "moment": "^2.27.0",
     "next": "^9.5.1",
     "postcss-flexbugs-fixes": "^4.2.1",

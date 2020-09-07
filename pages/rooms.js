@@ -1,11 +1,18 @@
 import { DefaultLayout } from "../components";
+import GetSheetDone from 'get-sheet-done';
 
 function Rooms() {
     const roomsList = [101,102,103,104,105,106];
+    const DOCUMENT_ID = "1L2UsWdDm6UU1dS3DZM5rqKDuNxqLOZnZ95OZkUBY-S0";
 
     const renderedRooms = roomsList.map(room => (
         <button className="btn-secondary ml-3">{`Room ${room}`}</button>
     ))
+
+    GetSheetDone.labeledCols(DOCUMENT_ID).then(sheet => {
+        console.log(sheet.data);
+    });
+    
 
   return (
     <DefaultLayout
