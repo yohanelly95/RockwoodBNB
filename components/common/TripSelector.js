@@ -1,10 +1,13 @@
 import Link from "next/link";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FromCalendarComponent from '../FromCalendar';
 import ToCalendarComponent from '../ToCalendar';
 import Popover from './Popover';
+import { useRouter } from 'next/router';
+import moment from 'moment';
+import { encode, decode } from '../../utils';
 
-export default function TripSelector() {
+export default function TripSelector(props) {
   const [showSelectedFromDate, setShowSelectedFromDate] = useState("");
   const [fromDateObj, setFromDateObj] = useState('');
   const [isFromPopoverOpen, setIsFromPopoverOpen] = useState(false);
@@ -15,9 +18,26 @@ export default function TripSelector() {
   const [numberOfGuest, setNumberOfGuest] = useState('');
   const [isRoomPopoverOpen, setIsRoomPopoverOpen] = useState(false);
   const [numberOfRooms, setNumberOfRooms] = useState('');
-  const guestArr = [1,2,3,4,5,6,7,8,9,10];
-  const roomsArr = [1,2,3,4,5,6];
+  const [isOnNav, setIsOnNav] = useState(false);
+  const [minRoomsReq, setMinRoomsReq] = useState([]);
+  let guestArr = [1,2,3,4,5,6,7,8,9,10];
+  let roomsArr = [1,2,3,4,5,6];
+  const router = useRouter();
 
+
+  useEffect(() => {
+    if(Object.keys(router.query).length > 0){
+      const fromDate = new Date (decode(router.query.from));
+      const toDate = new Date(decode(router.query.to));
+      const guestCount = decode(router.query.guest);
+      const roomCount = decode(router.query.rooms);
+      setShowSelectedFromDate(moment(fromDate).format('MMM Do'));
+      setShowSelectedToDate(moment(toDate).format('MMM Do'));
+      setNumberOfGuest(guestCount);
+      setNumberOfRooms(roomCount);
+      setIsOnNav(true);
+    }
+  }, [router]);
 
   const toggleFromPopOver = (event) => {
     setIsFromPopoverOpen((isFromPopoverOpen) => !isFromPopoverOpen);
@@ -54,6 +74,15 @@ export default function TripSelector() {
     setIsRoomPopoverOpen((isRoomPopoverOpen) => !isRoomPopoverOpen);
   }
 
+  const calculateRooms = (value) => {
+    setNumberOfGuest(value);
+    let minRoomsRequired = Math.ceil(value/2);
+    const minRoomArr = roomsArr.filter((room) => room >= minRoomsRequired);
+    setMinRoomsReq(minRoomArr);
+  }
+
+  const { isNav } = props;
+
   return (
     <div className="">
       <div className="flex justify-center items-center">
@@ -62,6 +91,7 @@ export default function TripSelector() {
             <button
               className="btn-date dropdown relative btn-from-date"
               onClick={toggleFromPopOver}
+              disabled={isNav}
             >
               { showSelectedFromDate ? showSelectedFromDate : "From" }
               <img src="chevron.svg" className={isFromPopoverOpen ? "chevron chevron-rotate": "chevron"}/>
@@ -73,7 +103,7 @@ export default function TripSelector() {
                 togglePopOver={toggleFromPopOver}
                 isPopoverOpen={isFromPopoverOpen}
               >
-                <FromCalendarComponent getFromCalendarDate={getFromCalendarDate} toggleNextPopover={toggleNextPopover}/>
+                <FromCalendarComponent getFromCalendarDate={getFromCalendarDate} toggleNextPopover={toggleNextPopover} initialDate={router.query.from || ''} isOnNav={isOnNav} />
               </Popover>
             )}
           </div>
@@ -81,6 +111,7 @@ export default function TripSelector() {
             <button
               className="btn-date dropdown relative btn-to-date"
               onClick={toggleToPopOver}
+              disabled={isNav}
             >
               { showSelectedToDate ? showSelectedToDate : "To" }
               <img src="chevron.svg" className={isToPopoverOpen ? "chevron chevron-rotate": "chevron"}/>
@@ -100,6 +131,7 @@ export default function TripSelector() {
             <button
               className="btn-guest-room dropdown relative btn-guest"
               onClick={toggleGuestPopover}
+              disabled={isNav}
             >
               { numberOfGuest ? numberOfGuest : "Guests" }
               <img src="chevron.svg" className={isGuestPopoverOpen ? "chevron chevron-rotate": "chevron"}/>
@@ -113,7 +145,7 @@ export default function TripSelector() {
               >
               <ul>
                 {guestArr.map((value, index) => {
-                  return <li className="guest-room-list" key={index} onClick={() => setNumberOfGuest(value)}>{value}</li>
+                  return <li className="guest-room-list" key={index} onClick={(e) => calculateRooms(value)}>{value}</li>
                 })}
               </ul>
               </Popover>
@@ -123,6 +155,7 @@ export default function TripSelector() {
             <button
               className="btn-guest-room dropdown relative btn-rooms"
               onClick={toggleRoomPopover}
+              disabled={isNav}
             >
               { numberOfRooms ? numberOfRooms : "Rooms" }
               <img src="chevron.svg" className={isRoomPopoverOpen ? "chevron chevron-rotate": "chevron"}/>
@@ -135,22 +168,28 @@ export default function TripSelector() {
                 isPopoverOpen={isRoomPopoverOpen}
               >
               <ul>
-                {roomsArr.map((value, index) => {
+                {minRoomsReq.length > 0 ? minRoomsReq.map((value, index) => {
                   return <li className="guest-room-list" key={index} onClick={() => setNumberOfRooms(value)}>{value}</li>
-                })}
+                }) :
+                roomsArr.map((value, index) => {
+                  return <li className="guest-room-list" key={index} onClick={() => setNumberOfRooms(value)}>{value}</li>
+                })
+                }
               </ul>
               </Popover>
             )}
           </div>
         </div>
-        <Link href="/rooms">
+        { fromDateObj && toDateObj && numberOfRooms && numberOfGuest && 
+         <Link  href={{ pathname: '/rooms',  query: { from: encode(fromDateObj), to: encode(toDateObj), guest: encode(numberOfGuest), rooms: encode(numberOfRooms) } }}>
           <a className="bg-black py-2 px-6 rounded-full ml-4">
-            <img
-              src="arrow-right.svg"
-              className="h-8 w-8"
-            ></img>
+              <img
+                src="arrow-right.svg"
+                className="h-8 w-8"
+              />
           </a>
-        </Link>
+         </Link>
+        }
       </div>
     </div>
   );
