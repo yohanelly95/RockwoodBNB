@@ -1,6 +1,4 @@
-/**
- * Created by vikas on 13/05/17.
- */
+
 import CryptoJs from 'crypto-js';
 const chabi = "You won't get anything even if you find this key, bitch!";
 export const encode = (data) => {
