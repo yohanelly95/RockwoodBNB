@@ -11,7 +11,7 @@ export default function IndexPage() {
         <div className="m-auto transform -translate-y-full w-full">
           <h1 className="text-center">welcome to rockwood bnb</h1>
           <div className="mt-6">
-            <TripSelector />
+            <TripSelector isNav={false}/>
           </div>
         </div>
       </div>
