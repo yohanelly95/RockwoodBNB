@@ -17,7 +17,7 @@ export default function Nav() {
         />
       </Link>
       <div className="self-center w-full">
-        <TripSelector />
+        <TripSelector isNav={true}/>
       </div>
     </nav>
   )
