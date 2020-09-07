@@ -5,7 +5,7 @@ import ToCalendarComponent from '../ToCalendar';
 import Popover from './Popover';
 import { useRouter } from 'next/router';
 import moment from 'moment';
-
+import { encode, decode } from '../../utils';
 
 export default function TripSelector(props) {
   const [showSelectedFromDate, setShowSelectedFromDate] = useState("");
@@ -26,13 +26,11 @@ export default function TripSelector(props) {
 
 
   useEffect(() => {
-    console.log("Object.keys(router.query)",Object.keys(router.query));
     if(Object.keys(router.query).length > 0){
-      console.log("ROUTER", router.query);
-      const fromDate = new Date (router.query.from);
-      const toDate = new Date(router.query.to);
-      const guestCount = router.query.guest;
-      const roomCount = router.query.rooms;
+      const fromDate = new Date (decode(router.query.from));
+      const toDate = new Date(decode(router.query.to));
+      const guestCount = decode(router.query.guest);
+      const roomCount = decode(router.query.rooms);
       setShowSelectedFromDate(moment(fromDate).format('MMM Do'));
       setShowSelectedToDate(moment(toDate).format('MMM Do'));
       setNumberOfGuest(guestCount);
@@ -183,7 +181,7 @@ export default function TripSelector(props) {
           </div>
         </div>
         { fromDateObj && toDateObj && numberOfRooms && numberOfGuest && 
-         <Link  href={{ pathname: '/rooms',  query: { from: fromDateObj.toString(), to: toDateObj.toString(), guest: numberOfGuest, rooms: numberOfRooms } }}>
+         <Link  href={{ pathname: '/rooms',  query: { from: encode(fromDateObj), to: encode(toDateObj), guest: encode(numberOfGuest), rooms: encode(numberOfRooms) } }}>
           <a className="bg-black py-2 px-6 rounded-full ml-4">
               <img
                 src="arrow-right.svg"
