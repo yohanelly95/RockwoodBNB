@@ -1,8 +1,11 @@
 import Link from "next/link";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import FromCalendarComponent from '../FromCalendar';
 import ToCalendarComponent from '../ToCalendar';
 import Popover from './Popover';
+import { useRouter } from 'next/router';
+import moment from 'moment';
+
 
 export default function TripSelector() {
   const [showSelectedFromDate, setShowSelectedFromDate] = useState("");
@@ -15,9 +18,27 @@ export default function TripSelector() {
   const [numberOfGuest, setNumberOfGuest] = useState('');
   const [isRoomPopoverOpen, setIsRoomPopoverOpen] = useState(false);
   const [numberOfRooms, setNumberOfRooms] = useState('');
+  const [isOnNav, setIsOnNav] = useState(false);
   const guestArr = [1,2,3,4,5,6,7,8,9,10];
   const roomsArr = [1,2,3,4,5,6];
+  const router = useRouter();
 
+
+  useEffect(() => {
+    console.log("Object.keys(router.query)",Object.keys(router.query));
+    if(Object.keys(router.query).length > 0){
+      console.log("ROUTER", router.query);
+      const fromDate = new Date (router.query.from);
+      const toDate = new Date(router.query.to);
+      const guestCount = router.query.guest;
+      const roomCount = router.query.rooms;
+      setShowSelectedFromDate(moment(fromDate).format('MMM Do'));
+      setShowSelectedToDate(moment(toDate).format('MMM Do'));
+      setNumberOfGuest(guestCount);
+      setNumberOfRooms(roomCount);
+      setIsOnNav(true);
+    }
+  }, [router]);
 
   const toggleFromPopOver = (event) => {
     setIsFromPopoverOpen((isFromPopoverOpen) => !isFromPopoverOpen);
@@ -73,7 +94,7 @@ export default function TripSelector() {
                 togglePopOver={toggleFromPopOver}
                 isPopoverOpen={isFromPopoverOpen}
               >
-                <FromCalendarComponent getFromCalendarDate={getFromCalendarDate} toggleNextPopover={toggleNextPopover}/>
+                <FromCalendarComponent getFromCalendarDate={getFromCalendarDate} toggleNextPopover={toggleNextPopover} initialDate={router.query.from || ''} isOnNav={isOnNav} />
               </Popover>
             )}
           </div>
@@ -143,14 +164,16 @@ export default function TripSelector() {
             )}
           </div>
         </div>
-        <Link href="/rooms">
+        { fromDateObj && toDateObj && numberOfRooms && numberOfGuest && 
+         <Link  href={{ pathname: '/rooms',  query: { from: fromDateObj.toString(), to: toDateObj.toString(), guest: numberOfGuest, rooms: numberOfRooms } }}>
           <a className="bg-black py-2 px-6 rounded-full ml-4">
-            <img
-              src="arrow-right.svg"
-              className="h-8 w-8"
-            ></img>
+              <img
+                src="arrow-right.svg"
+                className="h-8 w-8"
+              />
           </a>
-        </Link>
+         </Link>
+        }
       </div>
     </div>
   );
