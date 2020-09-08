@@ -1,7 +1,18 @@
+import { useState, useEffect } from 'react';
 import { DefaultLayout } from "../components";
+import RoomBilling from '../components/RoomBilling';
+import { useRouter } from 'next/router';
+import { encode, decode } from '../utils';
+import moment from 'moment';
 import GetSheetDone from 'get-sheet-done';
 
-function Rooms() {
+
+const Rooms = () => {
+
+    const [fromDate, setFromDate] = useState('');
+    const [toDate, setToDate] = useState('');
+    const [numberOfGuest, setNumberOfGuest] = useState('');
+    const [numberOfRooms, setNumberOfRooms] = useState('');
     const roomsList = [101,102,103,104,105,106];
     const DOCUMENT_ID = "1L2UsWdDm6UU1dS3DZM5rqKDuNxqLOZnZ95OZkUBY-S0";
 
@@ -12,7 +23,23 @@ function Rooms() {
     GetSheetDone.labeledCols(DOCUMENT_ID).then(sheet => {
         console.log(sheet.data);
     });
-    
+
+
+    const router = useRouter();
+
+    useEffect(() => {
+        if(Object.keys(router.query).length > 0){
+            const fromDateParam = new Date(decode(router.query.from));
+            const toDateParam = new Date(decode(router.query.to));
+            const guestCount = decode(router.query.guest);
+            const roomCount = decode(router.query.rooms);
+            setFromDate(moment(fromDateParam).format('MMM Do'));
+            setToDate(moment(toDateParam).format('MMM Do'));
+            setNumberOfGuest(guestCount);
+            setNumberOfRooms(roomCount);
+        }
+      }, [router]);
+
 
   return (
     <DefaultLayout
@@ -61,25 +88,7 @@ function Rooms() {
             </div>
         </div>
         <div className="w-1/4 pl-6">
-            <h2 className="mt-4">Room 3</h2>
-            <div className="w-full mt-6 py-4 px-6 bg-gray-200 rounded-lg flex flex-col flex-grow">
-                <p className="text-2xl">₹<span>1999</span><span className="text-base"> /night</span></p>
-                <p className="mt-2"><span>24th Aug</span> to <span>26th Aug</span></p>
-                <p className="mt-6">₹<span>1999</span> x <span>2</span><span className="float-right">₹<span>3998</span></span></p>
-                <p className="mt-2">Extra Bedding<span className="float-right">₹<span>750</span></span></p>
-                <p className="mt-4 font-bold">Total<span className="float-right">₹<span>4748</span></span></p>
-                <button className="btn-primary btn-fw mt-12 font-bold">BOOK</button>
-                <p className="text-center w-full mt-4">You won't be charged yet</p>
-            </div>
-            <ol className="my-6">
-                <li><p>First Floor</p></li>
-                <li><p>Road facing windows</p></li>
-                <li><p>Balcony</p></li>
-                <li><p>Closet space</p></li>
-                <li><p>Heaters available on request</p></li>
-                <li><p>Shower</p></li>
-                <li><p>Laptop friendly workspace</p></li>
-            </ol>
+            <RoomBilling fromDate={fromDate} toDate={toDate} numberOfGuest={numberOfGuest} numberOfRooms={numberOfRooms}/>
         </div>
       </section>
       <section className="mt-8 pb-20">
