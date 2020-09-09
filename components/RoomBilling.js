@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 
 const RoomBilling = (props) => {
 
-    const { fromDate, toDate, numberOfGuest, numberOfRooms } = props;
+    const { fromDate, toDate, numberOfGuest, numberOfRooms} = props;
 
     //Total Calc can be done here
 

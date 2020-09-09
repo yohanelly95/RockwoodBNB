@@ -13,34 +13,64 @@ const Rooms = () => {
     const [toDate, setToDate] = useState('');
     const [numberOfGuest, setNumberOfGuest] = useState('');
     const [numberOfRooms, setNumberOfRooms] = useState('');
-    const roomsList = [101,102,103,104,105,106];
-    const DOCUMENT_ID = "1L2UsWdDm6UU1dS3DZM5rqKDuNxqLOZnZ95OZkUBY-S0";
     const [sheetData, setSheetData] = useState({});
+    const [roomSelection, setRoomSelection] = useState('');
 
-
-    const renderedRooms = roomsList.map(room => (
-        <button className="btn-secondary ml-3">{`Room ${room}`}</button>
-    ))
-
+    const DOCUMENT_ID = "1L2UsWdDm6UU1dS3DZM5rqKDuNxqLOZnZ95OZkUBY-S0";
     GetSheetDone.labeledCols(DOCUMENT_ID).then(sheet => {
         setSheetData(sheet.data);
     });
 
-
     const router = useRouter();
 
     useEffect(() => {
-        if(Object.keys(router.query).length > 0){
-            const fromDateParam = new Date(decode(router.query.from));
-            const toDateParam = new Date(decode(router.query.to));
-            const guestCount = decode(router.query.guest);
-            const roomCount = decode(router.query.rooms);
-            setFromDate(moment(fromDateParam).format('MMM Do'));
-            setToDate(moment(toDateParam).format('MMM Do'));
-            setNumberOfGuest(guestCount);
-            setNumberOfRooms(roomCount);
-        }
-      }, [router]);
+      if (Object.keys(router.query).length > 0) {
+        const fromDateParam = new Date(decode(router.query.from));
+        const toDateParam = new Date(decode(router.query.to));
+        const guestCount = decode(router.query.guest);
+        const roomCount = decode(router.query.rooms);
+        setFromDate(moment(fromDateParam).format("MMM Do"));
+        setToDate(moment(toDateParam).format("MMM Do"));
+        setNumberOfGuest(guestCount);
+        setNumberOfRooms(roomCount);
+        setRoomSelection(roomSelection);
+      }
+    }, [router]);
+
+    // const onRoomSelect = (e) => {
+    //     setRoomSelection((roomSelection) => roomSelection = e);
+    //     console.log(roomSelection)
+    // }
+
+    // console.log(roomSelection)
+
+    // const roomAvailibility = (roomNum, selectionList) => {
+    //     if (selectionList)
+    // }
+
+    const renderRoomButtons = Object.keys(sheetData).map((obj, i) => (
+        <button 
+            key={i} 
+            onClick={() => {
+                setRoomSelection(i);
+                // console.log(i);
+            }}
+            className={`${sheetData[obj].status ? "" : "btn-disabled "}btn-secondary ml-3`}
+        >
+                {`Room ${sheetData[obj].room}`}
+        </button>
+    ))
+
+    const renderRoomData = Object.keys(sheetData).map((obj, i) => (
+        <div key={i} className={`w-1/2 h-8 pr-3 flex items-center ${i > 1 ? "mt-4" : ""}`}>
+            <div className="w-8 h-8 m-0 bg-gray-200 rounded-full"></div>
+            <p className="ml-2">{sheetData[obj].data}</p>
+        </div>
+    ))
+
+    // const renderSidebarData = Object.keys(sheetData).map((obj, i) => (
+    //     <li key={i}><p>{sheetData[obj].sidebar}</p></li>
+    // ))
 
 
   return (
@@ -51,7 +81,7 @@ const Rooms = () => {
       <section className="flex flex-row border-b-2 border-gray-200">
         <div className="w-3/4 border-r-2 border-gray-200 pr-6 pb-10">
             <div className="w-full py-6">
-                Select a room : <span>{renderedRooms}</span>
+                Select a room : <span>{renderRoomButtons}</span>
             </div>
             <div className="">
                 <div className="h-64 bg-gray-200 rounded-lg">
@@ -61,7 +91,7 @@ const Rooms = () => {
                         <p>Located in Manāli, 1.5 km from Hidimba Devi Temple, Rockwood B&B provides accommodation with a shared lounge, free WiFi, a 24-hour front desk, and a shared kitchen. This bed and breakfast features free private parking and room service.</p>
                     </div>
                     <div className="w-1/3 pl-4 flex flex-wrap justify-between">
-                        <div className="w-1/2 h-8 pr-3 flex items-center">
+                        {/* <div className="w-1/2 h-8 pr-3 flex items-center">
                             <div className="w-8 h-8 m-0 bg-gray-200 rounded-full"></div>
                             <p className="ml-2">Free Parking</p>
                         </div>
@@ -84,13 +114,14 @@ const Rooms = () => {
                         <div className="w-1/2 h-8 pl-3 mt-4 flex items-center">
                             <div className="w-8 h-8 m-0 bg-gray-200 rounded-full"></div>
                             <p className="ml-2">Heater</p>
-                        </div>
+                        </div> */}
+                        {renderRoomData}
                     </div>
                 </div>
             </div>
         </div>
         <div className="w-1/4 pl-6">
-            <RoomBilling fromDate={fromDate} toDate={toDate} numberOfGuest={numberOfGuest} numberOfRooms={numberOfRooms}/>
+            <RoomBilling fromDate={fromDate} toDate={toDate} numberOfGuest={numberOfGuest} numberOfRooms={numberOfRooms} sheetData={sheetData}/>
         </div>
       </section>
       <section className="mt-8 pb-20">

@@ -3,14 +3,30 @@
 /* CTAs & Buttons */
 
 .btn-primary {
-  @apply rounded-full border-2 border-black bg-black py-1 px-6 text-white text-sm;
+  @apply rounded-full border-2 border-black bg-black py-1 px-6 text-white text-sm transition duration-200;
 }
+
+.btn-primary:hover {
+  @apply shadow-xl;
+}
+
 .btn-primary.btn-fw {
   @apply rounded-full border-2 border-black bg-black py-4 w-full text-white text-sm;
 }
 .btn-secondary {
-  @apply rounded-full border-2 border-gray-400 py-1 px-6 text-gray-600 text-sm;
+  @apply rounded-full border-2 border-gray-400 py-1 px-6 text-gray-600 text-sm transition duration-200;
 }
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+  @apply border-gray-700 text-black;
+}
+
+.btn-disabled {
+  @apply opacity-25 cursor-default pointer-events-none;
+}
+
+
 
 .btn-date {
   @apply py-3 w-40 uppercase text-left flex items-center justify-between;
