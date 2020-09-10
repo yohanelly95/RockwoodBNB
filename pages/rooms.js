@@ -15,6 +15,8 @@ const Rooms = () => {
     const [numberOfRooms, setNumberOfRooms] = useState('');
     const [sheetData, setSheetData] = useState({});
     const [roomSelection, setRoomSelection] = useState('');
+    const roomData = ["Free Parking", "Balcony", "Geyser", "WiFI", "Television", "Heater"];
+    const roomPhotos = ["/assets/img/room1-1.jpg", "/assets/img/room1-2.jpg", "/assets/img/room1-3.jpg"];
 
     const DOCUMENT_ID = "1L2UsWdDm6UU1dS3DZM5rqKDuNxqLOZnZ95OZkUBY-S0";
     GetSheetDone.labeledCols(DOCUMENT_ID).then(sheet => {
@@ -61,17 +63,23 @@ const Rooms = () => {
         </button>
     ))
 
-    const renderRoomData = Object.keys(sheetData).map((obj, i) => (
-        <div key={i} className={`w-1/2 h-8 pr-3 flex items-center ${i > 1 ? "mt-4" : ""}`}>
-            <div className="w-8 h-8 m-0 bg-gray-200 rounded-full"></div>
-            <p className="ml-2">{sheetData[obj].data}</p>
+    const renderRoomData = roomData.map((roomDataItem, i) => (
+        <div key={roomDataItem} className={`w-1/2 h-8 pr-3 flex items-center ${i > 1 ? "mt-4" : ""}`}>
+            <div className="w-8 h-8 m-0"><img src={`/assets/icons/${i+1}.svg`}></img></div>
+            <p className="ml-2">{roomDataItem}</p>
         </div>
     ))
 
     // const renderSidebarData = Object.keys(sheetData).map((obj, i) => (
     //     <li key={i}><p>{sheetData[obj].sidebar}</p></li>
-    // ))
-
+    // )) id={`photo${i}`}
+    
+    const renderRoomPhotos = roomPhotos.map((roomPhoto, i) => (
+        <div 
+            className={`${i > 0 ? "row-span-1" : "row-span-2 col-span-2"} bg-local bg-cover bg-center rounded`} 
+            style={{backgroundImage: 'url(' + roomPhoto + ')'}}>
+        </div>
+    ))
 
   return (
     <DefaultLayout
@@ -84,37 +92,14 @@ const Rooms = () => {
                 Select a room : <span>{renderRoomButtons}</span>
             </div>
             <div className="">
-                <div className="h-64 bg-gray-200 rounded-lg">
+                <div id="gallery" className="grid grid-rows-2 grid-cols-3 grid-flow-col gap-4">
+                    {renderRoomPhotos}
                 </div>
                 <div className="flex flex-row mt-8">
                     <div className="w-2/3">
                         <p>Located in Manāli, 1.5 km from Hidimba Devi Temple, Rockwood B&B provides accommodation with a shared lounge, free WiFi, a 24-hour front desk, and a shared kitchen. This bed and breakfast features free private parking and room service.</p>
                     </div>
                     <div className="w-1/3 pl-4 flex flex-wrap justify-between">
-                        {/* <div className="w-1/2 h-8 pr-3 flex items-center">
-                            <div className="w-8 h-8 m-0 bg-gray-200 rounded-full"></div>
-                            <p className="ml-2">Free Parking</p>
-                        </div>
-                        <div className="w-1/2 h-8 pl-3 flex items-center">
-                            <div className="w-8 h-8 m-0 bg-gray-200 rounded-full"></div>
-                            <p className="ml-2">Balcony</p>
-                        </div>
-                        <div className="w-1/2 h-8 pr-3 mt-4 flex items-center">
-                            <div className="w-8 h-8 m-0 bg-gray-200 rounded-full"></div>
-                            <p className="ml-2">Geyser</p>
-                        </div>
-                        <div className="w-1/2 h-8 pl-3 mt-4 flex items-center">
-                            <div className="w-8 h-8 m-0 bg-gray-200 rounded-full"></div>
-                            <p className="ml-2">WiFi</p>
-                        </div>
-                        <div className="w-1/2 h-8 pr-3 mt-4 flex items-center">
-                            <div className="w-8 h-8 m-0 bg-gray-200 rounded-full"></div>
-                            <p className="ml-2">Television</p>
-                        </div>
-                        <div className="w-1/2 h-8 pl-3 mt-4 flex items-center">
-                            <div className="w-8 h-8 m-0 bg-gray-200 rounded-full"></div>
-                            <p className="ml-2">Heater</p>
-                        </div> */}
                         {renderRoomData}
                     </div>
                 </div>

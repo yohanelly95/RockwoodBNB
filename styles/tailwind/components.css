@@ -7,7 +7,11 @@
 }
 
 .btn-primary:hover {
-  @apply shadow-xl;
+  @apply shadow-2xl;
+}
+
+.btn-primary:active {
+  @apply shadow-md;
 }
 
 .btn-primary.btn-fw {
@@ -19,7 +23,11 @@
 
 .btn-secondary:hover,
 .btn-secondary:focus {
-  @apply border-gray-700 text-black;
+  @apply border-gray-700 text-black shadow-xl;
+}
+
+.btn-secondary:active {
+  @apply shadow-md;
 }
 
 .btn-disabled {
@@ -59,3 +67,15 @@
   @apply px-4 mx-auto my-0;
 }
 
+#gallery > div:first-child {
+  height: 450px;
+}
+
+#gallery > div {
+  height: 217px;
+}
+
+#gallery > div > img{
+  width: auto;
+  height: 100%;
+}
