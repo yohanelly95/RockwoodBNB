@@ -21,8 +21,7 @@
   @apply rounded-full border-2 border-gray-400 py-1 px-6 text-gray-600 text-sm transition duration-200;
 }
 
-.btn-secondary:hover,
-.btn-secondary:focus {
+.btn-secondary:hover {
   @apply border-gray-700 text-black shadow-xl;
 }
 
