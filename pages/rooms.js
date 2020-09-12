@@ -6,6 +6,7 @@ import { encode, decode } from '../utils';
 import moment from 'moment';
 import GetSheetDone from 'get-sheet-done';
 
+const DOCUMENT_ID = "1L2UsWdDm6UU1dS3DZM5rqKDuNxqLOZnZ95OZkUBY-S0";
 
 const Rooms = () => {
 
@@ -14,16 +15,17 @@ const Rooms = () => {
     const [numberOfGuest, setNumberOfGuest] = useState('');
     const [numberOfRooms, setNumberOfRooms] = useState('');
     const [sheetData, setSheetData] = useState({});
-    const [roomSelection, setRoomSelection] = useState('');
+    const [roomsSelected, setRoomsSelected] = useState([]);
+    let [roomsSelectedCount, setRoomsSelectedCount] = useState(0);
     const roomData = ["Free Parking", "Balcony", "Geyser", "WiFI", "Television", "Heater"];
     const roomPhotos = ["/assets/img/room1-1.jpg", "/assets/img/room1-2.jpg", "/assets/img/room1-3.jpg"];
-
-    const DOCUMENT_ID = "1L2UsWdDm6UU1dS3DZM5rqKDuNxqLOZnZ95OZkUBY-S0";
-    GetSheetDone.labeledCols(DOCUMENT_ID).then(sheet => {
-        setSheetData(sheet.data);
-    });
-
     const router = useRouter();
+
+    useEffect(() =>{
+        GetSheetDone.labeledCols(DOCUMENT_ID).then(sheet => {
+            setSheetData(sheet.data);
+        });
+    },[])
 
     useEffect(() => {
       if (Object.keys(router.query).length > 0) {
@@ -35,33 +37,45 @@ const Rooms = () => {
         setToDate(moment(toDateParam).format("MMM Do"));
         setNumberOfGuest(guestCount);
         setNumberOfRooms(roomCount);
-        setRoomSelection(roomSelection);
       }
     }, [router]);
 
-    // const onRoomSelect = (e) => {
-    //     setRoomSelection((roomSelection) => roomSelection = e);
-    //     console.log(roomSelection)
+    const handleRoomSelect = (roomNumber, index) => {
+        let updatedRooms;
+        const selectedRooms = {
+            roomNumber,
+            index
+        }
+        const isSelected = roomsSelected.some((room) => room.roomNumber == roomNumber);
+
+        if(isSelected){
+            updatedRooms = roomsSelected.filter((room) => room.index !== index);
+            setRoomsSelected(updatedRooms);
+        }else{
+                //Add logic here to check if they have already selected max no of rooms (numberOfRooms) and throw an error/replace previos selection with current
+                setRoomsSelected((roomsSelected) => [...roomsSelected, selectedRooms]);
+        }
+    }
+
+    // const handleCount = () => {
+    //     setRoomsSelectedCount(++roomsSelectedCount)
     // }
 
-    // console.log(roomSelection)
 
-    // const roomAvailibility = (roomNum, selectionList) => {
-    //     if (selectionList)
-    // }
+    const renderRoomButtons = Object.keys(sheetData).map((obj, index) => {
 
-    const renderRoomButtons = Object.keys(sheetData).map((obj, i) => (
-        <button 
-            key={i} 
-            onClick={() => {
-                setRoomSelection(i);
-                // console.log(i);
-            }}
-            className={`${sheetData[obj].status ? "" : "btn-disabled "}btn-secondary ml-3`}
-        >
-                {`Room ${sheetData[obj].room}`}
-        </button>
-    ))
+        const isActive = roomsSelected.some((room) => room.index == index);
+        return(
+            <button 
+            key={index} 
+            onClick={() => handleRoomSelect(sheetData[obj].room, index)}
+            className={sheetData[obj].status && isActive ? "btn-secondary ml-3 active-btn" : sheetData[obj].status && !isActive ? "btn-secondary ml-3" : "btn-disabled btn-secondary ml-3"}
+            disabled={sheetData[obj].status === ''}
+            id={index}>
+            {`Room ${sheetData[obj].room}`}
+            </button>
+        )
+    });
 
     const renderRoomData = roomData.map((roomDataItem, i) => (
         <div key={roomDataItem} className={`w-1/2 h-8 pr-3 flex items-center ${i > 1 ? "mt-4" : ""}`}>

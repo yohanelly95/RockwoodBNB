@@ -26,7 +26,12 @@
   @apply border-gray-700 text-black shadow-xl;
 }
 
-.btn-secondary:active {
+/* .btn-secondary:active {
+  @apply shadow-md;
+} */
+
+.active-btn{
+  @apply border-gray-700 text-black shadow-xl;
   @apply shadow-md;
 }
 
