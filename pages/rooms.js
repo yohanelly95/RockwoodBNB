@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { DefaultLayout } from "../components";
 import RoomBilling from '../components/RoomBilling';
 import { useRouter } from 'next/router';
@@ -20,6 +20,14 @@ const Rooms = () => {
     const roomData = ["Free Parking", "Balcony", "Geyser", "WiFI", "Television", "Heater"];
     const roomPhotos = ["/assets/img/room1-1.jpg", "/assets/img/room1-2.jpg", "/assets/img/room1-3.jpg"];
     const router = useRouter();
+    const memoizedSelectRoomCallback = useCallback(
+        (selectedRooms) => {
+            setRoomsSelected((roomsSelected) => [...roomsSelected, selectedRooms]);
+        },[roomsSelected]);
+    const memoizedUnselectRoomCallback  =  useCallback(
+        (updatedRooms) => {
+            setRoomsSelected(updatedRooms);
+        },[roomsSelected]);
 
     useEffect(() =>{
         GetSheetDone.labeledCols(DOCUMENT_ID).then(sheet => {
@@ -50,10 +58,12 @@ const Rooms = () => {
 
         if(isSelected){
             updatedRooms = roomsSelected.filter((room) => room.index !== index);
-            setRoomsSelected(updatedRooms);
+            // setRoomsSelected(updatedRooms);
+            memoizedUnselectRoomCallback(updatedRooms);
         }else{
                 //Add logic here to check if they have already selected max no of rooms (numberOfRooms) and throw an error/replace previos selection with current
-                setRoomsSelected((roomsSelected) => [...roomsSelected, selectedRooms]);
+                // setRoomsSelected((roomsSelected) => [...roomsSelected, selectedRooms]);
+                memoizedSelectRoomCallback(selectedRooms)
         }
     }
 
