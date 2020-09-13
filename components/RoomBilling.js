@@ -21,12 +21,18 @@ const __DEV__ = true;
 
 const RoomBilling = (props) => {
 
-    const { fromDate, toDate, numberOfGuest, numberOfRooms} = props;
+    const { fromDate, toDate, numberOfGuest, numberOfRooms, roomsSelected} = props;
     //Show modal to capture these values, hardcoding for now
     const [name, setName] = useState('Bruno');
     const [email, setEmail] = useState('bruno@tigbitties.com');
     const [totalRoomsAmount, setTotalRoomsAmount] = useState('');
     const [totalInvoiceAmount, setTotalInvoiceAmount] = useState('');
+    const [displayRoomsSelected, setDisplayRoomsSelected] = useState('')
+
+    useEffect(() => {
+        displaySelectedRooms();
+    }, [roomsSelected]);
+
 
     useEffect(() => {
         if(numberOfRooms){
@@ -78,9 +84,15 @@ const RoomBilling = (props) => {
             paymentObject.open();
     }
 
+    const displaySelectedRooms = () => {
+        const { roomsSelected } = props;
+        const concatRooms = roomsSelected && roomsSelected.map((room) => room.roomNumber);
+        setDisplayRoomsSelected(concatRooms.toString());
+    }
+
     return(
         <>
-        <h2 className="mt-4">Room 3</h2>
+        <h2 className="mt-4">{`Rooms: ${displayRoomsSelected}`}</h2>
             <div className="w-full mt-6 py-4 px-6 bg-gray-200 rounded-lg flex flex-col flex-grow">
                 <div className="">
                     <p className="text-2xl">₹<span>1999</span><span className="text-base"> /night</span></p>

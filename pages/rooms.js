@@ -130,7 +130,7 @@ const Rooms = () => {
             </div>
         </div>
         <div className="w-1/4 pl-6">
-            <RoomBilling fromDate={fromDate} toDate={toDate} numberOfGuest={numberOfGuest} numberOfRooms={numberOfRooms} sheetData={sheetData}/>
+            <RoomBilling fromDate={fromDate} toDate={toDate} numberOfGuest={numberOfGuest} numberOfRooms={numberOfRooms} sheetData={sheetData} roomsSelected={roomsSelected}/>
         </div>
       </section>
       <section className="mt-8 pb-20">
