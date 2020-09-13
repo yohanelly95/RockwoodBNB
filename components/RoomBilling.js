@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
+import { toastSuccess, toastError } from './common/Toast';
 import axios from 'axios';
-
 
 function loadScript(src) {
     return new Promise((resolve) => {
@@ -17,6 +17,7 @@ function loadScript(src) {
 }
 
 const __DEV__ = true;
+
 
 const RoomBilling = (props) => {
 
@@ -51,20 +52,21 @@ const RoomBilling = (props) => {
                 description: 'Payment for your stay',
                 image: '/assets/img/logo-sm.svg',
                 handler: function (response) {
-                    //Add either webhook for verification or success toast || WIP
+                    //Using a toast for now, webhook pending || WIP
+                    toastSuccess("Payment Successful!");
                     // alert(response.razorpay_payment_id)
                     // alert(response.razorpay_order_id)
                     // alert(response.razorpay_signature)
                 },
                 prefill: {
                     name,
-                    email: 'sdfdsjfh2@ndsfdf.com',
+                    email: email,
                     phone_number: '9899999999'
                 }
             }
 
             const paymentObject = new window.Razorpay(options)
-            paymentObject.open()
+            paymentObject.open();
     }
 
     return(
