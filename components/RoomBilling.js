@@ -3,17 +3,17 @@ import axios from 'axios';
 
 
 function loadScript(src) {
-	return new Promise((resolve) => {
-		const script = document.createElement('script')
-		script.src = src
-		script.onload = () => {
-			resolve(true)
-		}
-		script.onerror = () => {
-			resolve(false)
-		}
-		document.body.appendChild(script)
-	})
+    return new Promise((resolve) => {
+        const script = document.createElement('script')
+        script.src = src
+        script.onload = () => {
+        resolve(true)
+        }
+        script.onerror = () => {
+        resolve(false)
+        }
+        document.body.appendChild(script)
+    })
 }
 
 const __DEV__ = true;
@@ -74,7 +74,7 @@ const RoomBilling = (props) => {
                 <div className="">
                     <p className="text-2xl">₹<span>1999</span><span className="text-base"> /night</span></p>
                     <p className="mt-2"><span>{fromDate}</span> to <span>{toDate}</span></p>
-                    <p className="mt-6">₹<span>1999</span> x <span>2</span><span className="float-right">₹<span>3998</span></span></p>
+                    <p className="mt-6">₹<span>1999</span> x <span>{numberOfRooms}</span><span className="float-right">₹<span>3998</span></span></p>
                     <p className="mt-2">Extra Bedding<span className="float-right">₹<span>750</span></span></p>
                     <p className="mt-4 font-bold">Total<span className="float-right">₹<span>4748</span></span></p>
                     <button className="btn-primary btn-fw mt-12 font-bold" onClick={displayRazorpay}>BOOK</button>
