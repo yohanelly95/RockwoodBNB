@@ -1,0 +1,26 @@
+.react-calendar {
+  @apply shadow-xl rounded-xl;
+}
+
+.date-dropdown {
+    @apply w-96 z-10 left-0 mt-2;
+}
+
+.guest-rooms-dropdown {
+  background-color: #ffffff;
+  border: 1px solid #d7d7d7;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.18);
+  width: 140px;
+  left: 24px;
+  z-index: 100;
+}
+
+.react-calendar--selectRange .react-calendar__tile--hover {
+  background-color: #ff8fd8 !important;
+}
+
+.guest-room-list {
+  padding: 12px;
+  cursor: pointer;
+}

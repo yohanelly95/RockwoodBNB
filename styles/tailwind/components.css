@@ -1,84 +1,153 @@
+@import "./calendar.css";
+
 /* CTAs & Buttons */
 
 .btn-primary {
-    @apply rounded-full border-2 border-black bg-black py-1 px-6 text-white text-sm;
-  }
-  
-  .btn-secondary {
-    @apply rounded-full border-2 border-gray-400 py-1 px-6 text-gray-600 text-sm;
-  }
-  
-  .btn-date {
-    @apply py-3 w-40 uppercase text-left flex items-center justify-between;
-  }
-  
-  .btn-guest-room{
-      @apply py-3 w-32 uppercase text-left flex items-center justify-between;
-  }
-  
-  .btn-date:focus{
-    @apply outline-none
-  }
-  
-  .btn-guest-room:focus{
-    @apply outline-none
-  }
-  
-  .chevron{
-    width: 24px;
-    margin-right: 24px;
-  }
-  
-  .chevron-rotate{
-    transform: rotate(180deg);
-  }
-  
-  /* Layout */
-  
-  .container {
-    @apply px-4 mx-auto my-0;
-  }
-  
-  /* Custom elements */
-  
-  /* .dropdown-container::after{
-    content: '';
-      display: inline-flex;
-      background: #888;
-      height: 18px;
-      position: relative;
-      width: 1px;
-      vertical-align: middle;
-      float: right;
-      right: -140px;
-      top: -33px;
-  } */
-  
-  .date-dropdown{
-    background-color: #FFFFFF;
-    border: 1px solid #D7D7D7;
-    border-radius: 6px;
-    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.18);
-    width: 290px;
-    left: 24px;
-    z-index: 100;
-  }
-  
-  .guest-rooms-dropdown{
-      background-color: #FFFFFF;
-      border: 1px solid #D7D7D7;
-      border-radius: 6px;
-      box-shadow: 0 2px 4px 0 rgba(0,0,0,0.18);
-      width: 140px;
-      left: 24px;
-      z-index: 100;
-  }
-  
-  .react-calendar--selectRange .react-calendar__tile--hover{
-    background-color: #FF8FD8 !important;
-  }
-  
-  .guest-room-list{
-    padding: 12px;
-    cursor: pointer;
-  }
+  @apply rounded-full border-2 border-black bg-black py-1 px-6 text-white text-sm transition duration-200;
+}
+
+.btn-primary:hover {
+  @apply shadow-2xl;
+}
+
+.btn-primary:active {
+  @apply shadow-md;
+}
+
+.btn-primary.btn-fw {
+  @apply rounded-full border-2 border-black bg-black py-4 w-full text-white text-sm;
+}
+.btn-secondary {
+  @apply rounded-full border-2 border-gray-400 py-1 px-6 text-gray-600 text-sm transition duration-200;
+}
+
+.btn-secondary:hover {
+  @apply border-gray-700 text-black shadow-xl;
+}
+
+/* .btn-secondary:active {
+  @apply shadow-md;
+} */
+
+.active-btn{
+  @apply border-gray-700 text-black shadow-xl;
+  @apply shadow-md;
+}
+
+.btn-disabled {
+  @apply opacity-25 cursor-default pointer-events-none;
+}
+
+
+
+.btn-date {
+  @apply py-3 w-40 uppercase text-left flex items-center justify-between;
+}
+
+.btn-guest-room {
+  @apply py-3 w-32 uppercase text-left flex items-center justify-between;
+}
+
+.btn-date:focus {
+  @apply outline-none;
+}
+
+.btn-guest-room:focus {
+  @apply outline-none;
+}
+
+.chevron {
+  width: 24px;
+  margin-right: 24px;
+}
+
+.chevron-rotate {
+  transform: rotate(180deg);
+}
+
+/* Layout */
+
+.container {
+  @apply px-4 mx-auto my-0;
+}
+
+#gallery > div:first-child {
+  height: 450px;
+}
+
+#gallery > div {
+  height: 217px;
+}
+
+#gallery > div > img{
+  width: auto;
+  height: 100%;
+}
+
+.Toastify__toast-container{
+  z-index: 9999;
+  -webkit-transform: translateZ(9999px);
+  position: fixed;
+  padding: 4px;
+  left: 50%;
+  box-sizing: border-box;
+  color: #fff;
+  min-width: 320px !important;
+  width: auto !important;
+}
+.Toastify__toast-container--top-center{
+  top: 1em;
+  transform: translateX(-50%);
+}
+.Toastify__toast{
+  min-height: 0 !important;
+  padding: 17px 24px !important;
+  border-radius: 8px !important;
+  max-width: 800px;
+}
+.Toastify__toast-body{
+  font-size: 14px;
+}
+.Toastify__toast--error{
+  border: none;
+  border-radius: 4px;
+}
+.Toastify__toast--success{
+  border:none;
+  border-radius: 4px;
+}
+.Toastify__toast--warning{
+  border:none;
+  border-radius: 4px;
+  background-color: #FCA800;
+}
+.toast-mailto {
+  color: white;
+  text-decoration: underline;
+}
+.toast-mailto:hover{
+  color: white;
+  text-decoration: underline;
+}
+
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+
+@media screen and (max-width: 768px){
+
+    .Toastify.Toastify__toast-container--top-center{
+        width: auto;
+        margin-left: -195px;
+    }
+}
+
+
+
+@media screen and (max-width: 767px) {
+  .Toastify__toast-container {
+  width: 80%;
+  margin-left: 0;
+  left: 10%;
+   }
+ }
