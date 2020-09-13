@@ -36,6 +36,14 @@ const Rooms = () => {
     },[])
 
     useEffect(() => {
+        if(roomsSelected.length > numberOfRooms){
+            let removedArray = roomsSelected[roomsSelected.length - 1];
+            removedArray = roomsSelected.filter((room) => room.index != removedArray.index);
+            setRoomsSelected(removedArray);
+        }
+    }, [roomsSelected])
+
+    useEffect(() => {
       if (Object.keys(router.query).length > 0) {
         const fromDateParam = new Date(decode(router.query.from));
         const toDateParam = new Date(decode(router.query.to));
@@ -62,7 +70,6 @@ const Rooms = () => {
             memoizedUnselectRoomCallback(updatedRooms);
         }else{
                 //Add logic here to check if they have already selected max no of rooms (numberOfRooms) and throw an error/replace previos selection with current
-                // setRoomsSelected((roomsSelected) => [...roomsSelected, selectedRooms]);
                 memoizedSelectRoomCallback(selectedRooms)
         }
     }
