@@ -37,7 +37,7 @@ const Rooms = () => {
 
     useEffect(() => {
         if(roomsSelected.length > numberOfRooms){
-            let removedArray = roomsSelected[roomsSelected.length - 1];
+            let removedArray = roomsSelected[roomsSelected.length - 2];
             removedArray = roomsSelected.filter((room) => room.index != removedArray.index);
             setRoomsSelected(removedArray);
         }
