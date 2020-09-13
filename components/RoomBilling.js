@@ -22,12 +22,21 @@ const __DEV__ = true;
 const RoomBilling = (props) => {
 
     const { fromDate, toDate, numberOfGuest, numberOfRooms} = props;
-
     //Show modal to capture these values, hardcoding for now
     const [name, setName] = useState('Bruno');
     const [email, setEmail] = useState('bruno@tigbitties.com');
+    const [totalRoomsAmount, setTotalRoomsAmount] = useState('');
+    const [totalInvoiceAmount, setTotalInvoiceAmount] = useState('');
 
-    //Stay total calc pending
+    useEffect(() => {
+        if(numberOfRooms){
+            axios.post("/api/invoice", {numberOfRooms: numberOfRooms}).then((response) => {
+                const { data: {totalRoomsCharge, totalInvoice} } = response
+                setTotalRoomsAmount(totalRoomsCharge);
+                setTotalInvoiceAmount(totalInvoice);
+            });
+        }
+    }, [numberOfRooms]);
 
         const displayRazorpay = async () =>  {
             const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
@@ -38,7 +47,7 @@ const RoomBilling = (props) => {
             }
 
             const data = await axios.post('api/razorpay', {
-                amount: 20 // Send this value from total calc
+                amount: totalInvoiceAmount // Send this value from total calc
             })
 
             const response = data.data;
@@ -76,9 +85,9 @@ const RoomBilling = (props) => {
                 <div className="">
                     <p className="text-2xl">₹<span>1999</span><span className="text-base"> /night</span></p>
                     <p className="mt-2"><span>{fromDate}</span> to <span>{toDate}</span></p>
-                    <p className="mt-6">₹<span>1999</span> x <span>{numberOfRooms}</span><span className="float-right">₹<span>3998</span></span></p>
+                    <p className="mt-6">₹<span>1999</span> x <span>{numberOfRooms}</span><span className="float-right">₹<span>{totalRoomsAmount}</span></span></p>
                     <p className="mt-2">Extra Bedding<span className="float-right">₹<span>750</span></span></p>
-                    <p className="mt-4 font-bold">Total<span className="float-right">₹<span>4748</span></span></p>
+                    <p className="mt-4 font-bold">Total<span className="float-right">₹<span>{totalInvoiceAmount ? totalInvoiceAmount : '...'}</span></span></p>
                     <button className="btn-primary btn-fw mt-12 font-bold" onClick={displayRazorpay}>BOOK</button>
                     <p className="text-center w-full mt-4">You won't be charged yet</p>
                 </div>
