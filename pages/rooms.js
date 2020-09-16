@@ -1,10 +1,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { DefaultLayout } from "../components";
 import RoomBilling from '../components/RoomBilling';
+import RoomSelection from '../components/layout/RoomSelection';
 import { useRouter } from 'next/router';
 import { encode, decode } from '../utils';
 import moment from 'moment';
 import GetSheetDone from 'get-sheet-done';
+
 
 const DOCUMENT_ID = "1L2UsWdDm6UU1dS3DZM5rqKDuNxqLOZnZ95OZkUBY-S0";
 
@@ -17,6 +19,8 @@ const Rooms = () => {
     const [sheetData, setSheetData] = useState({});
     const [roomsSelected, setRoomsSelected] = useState([]);
     let [roomsSelectedCount, setRoomsSelectedCount] = useState(0);
+    const roomState = [-1, -1, -1, -1, -1, -1];
+    const roomNumbers = [101, 102, 103, 104, 105, 106];
     const roomData = ["Free Parking", "Balcony", "Geyser", "WiFI", "Television", "Heater"];
     const roomPhotos = ["/assets/img/room1-1.jpg", "/assets/img/room1-2.jpg", "/assets/img/room1-3.jpg"];
     const router = useRouter();
@@ -78,37 +82,22 @@ const Rooms = () => {
     //     setRoomsSelectedCount(++roomsSelectedCount)
     // }
 
-
-    const renderRoomButtons = Object.keys(sheetData).map((obj, index) => {
-
-        const isActive = roomsSelected.some((room) => room.index == index);
-        return(
-            <button 
-            key={index} 
-            onClick={() => handleRoomSelect(sheetData[obj].room, index)}
-            className={sheetData[obj].status && isActive ? "btn-secondary ml-3 active-btn" : sheetData[obj].status && !isActive ? "btn-secondary ml-3" : "btn-disabled btn-secondary ml-3"}
-            disabled={sheetData[obj].status === ''}
-            id={index}>
-            {`Room ${sheetData[obj].room}`}
-            </button>
-        )
-    });
-
     const renderRoomData = roomData.map((roomDataItem, i) => (
-        <div key={roomDataItem} className={`w-1/2 h-8 pr-3 flex items-center ${i > 1 ? "mt-4" : ""}`}>
+        <div 
+            key={roomDataItem} 
+            className={`w-1/2 h-8 pr-3 flex items-center ${i > 1 ? "mt-4" : ""}`}
+        >
             <div className="w-8 h-8 m-0"><img src={`/assets/icons/${i+1}.svg`}></img></div>
             <p className="ml-2">{roomDataItem}</p>
         </div>
     ))
-
-    // const renderSidebarData = Object.keys(sheetData).map((obj, i) => (
-    //     <li key={i}><p>{sheetData[obj].sidebar}</p></li>
-    // )) id={`photo${i}`}
     
     const renderRoomPhotos = roomPhotos.map((roomPhoto, i) => (
         <div 
+            key={i}
             className={`${i > 0 ? "row-span-1" : "row-span-2 col-span-2"} bg-local bg-cover bg-center rounded`} 
-            style={{backgroundImage: 'url(' + roomPhoto + ')'}}>
+            style={{backgroundImage: 'url(' + roomPhoto + ')'}}
+        >
         </div>
     ))
 
@@ -120,7 +109,7 @@ const Rooms = () => {
       <section className="flex flex-row border-b-2 border-gray-200">
         <div className="w-3/4 border-r-2 border-gray-200 pr-6 pb-10">
             <div className="w-full py-6">
-                Select a room : <span>{renderRoomButtons}</span>
+                <RoomSelection roomState={roomState} roomsSelected={roomsSelected} handleRoomSelect={handleRoomSelect} roomNumbers={roomNumbers} numberOfRooms={numberOfRooms} sheetData={sheetData}/>
             </div>
             <div className="">
                 <div id="gallery" className="grid grid-rows-2 grid-cols-3 grid-flow-col gap-4">
