@@ -23,6 +23,7 @@
     "axios": "^0.20.0",
     "crypto-js": "^4.0.0",
     "get-sheet-done": "^0.1.5",
+    "google-spreadsheet": "^3.0.13",
     "moment": "^2.27.0",
     "next": "^9.5.3",
     "postcss-flexbugs-fixes": "^4.2.1",
@@ -38,6 +39,7 @@
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^2.3.0",
     "autoprefixer": "^9.8.6",
+    "dotenv-webpack": "^2.0.0",
     "postcss-preset-env": "^6.7.0",
     "tailwindcss": "^1.6.2"
   }

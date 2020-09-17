@@ -51,11 +51,11 @@ const RoomBilling = (props) => {
             alert('Razorpay SDK failed to load. Are you online?')
             return
             }
+            const GApiTest = await axios.post('api/gapi');
 
             const data = await axios.post('api/razorpay', {
                 amount: totalInvoiceAmount // Send this value from total calc
             })
-
             const response = data.data;
 
             const options = {
