@@ -1,4 +1,4 @@
-import { GoogleSpreadsheet } from "google-spreadsheet";
+const { GoogleSpreadsheet } = require('google-spreadsheet');
 // Config variables
 const SPREADSHEET_ID = process.env.GSPREADSHEET_ID;
 const SHEET_ID = process.env.GSHEET_ID || '0';
