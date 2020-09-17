@@ -7,8 +7,7 @@ The website code that powers rockwoodbnb.com
 
 * npm i
 
-* next (dev build)
+* npm run dev ( dev )
 
-* next build (prod build)
+* npm run-script build  (prod )
 
-* next start (prod server)
