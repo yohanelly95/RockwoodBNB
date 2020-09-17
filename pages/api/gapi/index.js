@@ -1,12 +1,11 @@
 import { GoogleSpreadsheet } from "google-spreadsheet";
 // Config variables
-const SPREADSHEET_ID = process.env.GSPREADSHEET_ID || '1aa5FiiKe0xNtbTTHXo7sO1kWgK74zyHdvOlSZRjpzB0';
+const SPREADSHEET_ID = process.env.GSPREADSHEET_ID;
 const SHEET_ID = process.env.GSHEET_ID || '0';
-const CLIENT_EMAIL = process.env.GCLIENT_EMAIL || 'demo-403@proven-outpost-289813.iam.gserviceaccount.com';
-const PRIVATE_KEY = process.env.GPRIVATE_KEY || ``;
+const CLIENT_EMAIL = process.env.GCLIENT_EMAIL;
+const PRIVATE_KEY = process.env.GPRIVATE_KEY;
 
 const doc = new GoogleSpreadsheet(SPREADSHEET_ID);
-console.log("DOCUMENT DATA", doc);
 
 
 export default async (req, res) => {
@@ -15,7 +14,7 @@ export default async (req, res) => {
             try {
               await doc.useServiceAccountAuth({
                 client_email: CLIENT_EMAIL,
-                private_key: PRIVATE_KEY,
+                private_key: PRIVATE_KEY.replace(/\\n/gm, '\n'),
               });
               await doc.loadInfo();
           
