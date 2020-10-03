@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { toastSuccess, toastError } from './common/Toast';
 import axios from 'axios';
+import moment from 'moment';
 
 function loadScript(src) {
     return new Promise((resolve) => {
@@ -85,7 +86,6 @@ const RoomBilling = (props) => {
     }
 
     const displaySelectedRooms = () => {
-        const { roomsSelected } = props;
         const concatRooms = roomsSelected && roomsSelected.map((room) => room.roomNumber);
         setDisplayRoomsSelected(concatRooms.toString());
     }
@@ -96,7 +96,7 @@ const RoomBilling = (props) => {
             <div className="w-full mt-6 py-4 px-6 bg-gray-200 rounded-lg flex flex-col flex-grow">
                 <div className="">
                     <p className="text-2xl">₹<span>1999</span><span className="text-base"> /night</span></p>
-                    <p className="mt-2"><span>{fromDate}</span> to <span>{toDate}</span></p>
+                    <p className="mt-2"><span>{moment(fromDate).format("MMM Do, YYYY")}</span> to <span>{moment(toDate).format("MMM Do, YYYY")}</span></p>
                     <p className="mt-6">₹<span>1999</span> x <span>{numberOfRooms}</span><span className="float-right">₹<span>{totalRoomsAmount}</span></span></p>
                     <p className="mt-2">Extra Bedding<span className="float-right">₹<span>750</span></span></p>
                     <p className="mt-4 font-bold">Total<span className="float-right">₹<span>{totalInvoiceAmount ? totalInvoiceAmount : '...'}</span></span></p>

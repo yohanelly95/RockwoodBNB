@@ -8,7 +8,7 @@ import moment from 'moment';
 import GetSheetDone from 'get-sheet-done';
 
 
-const DOCUMENT_ID = "1L2UsWdDm6UU1dS3DZM5rqKDuNxqLOZnZ95OZkUBY-S0";
+const DOCUMENT_ID = "1bZGNJCOPal6_MZ-wiW8DWSsgVtKgb4GlBdIcFjWcp38";
 
 const Rooms = () => {
 
@@ -19,7 +19,6 @@ const Rooms = () => {
     const [sheetData, setSheetData] = useState({});
     const [roomsSelected, setRoomsSelected] = useState([]);
     let [roomsSelectedCount, setRoomsSelectedCount] = useState(0);
-    const roomState = [-1, -1, -1, -1, -1, -1];
     const roomNumbers = [101, 102, 103, 104, 105, 106];
     const roomData = ["Free Parking", "Balcony", "Geyser", "WiFI", "Television", "Heater"];
     const roomPhotos = ["/assets/img/room1-1.jpg", "/assets/img/room1-2.jpg", "/assets/img/room1-3.jpg"];
@@ -40,11 +39,7 @@ const Rooms = () => {
     },[])
 
     useEffect(() => {
-        if(roomsSelected.length > numberOfRooms){
-            let removedArray = roomsSelected[roomsSelected.length - 2];
-            removedArray = roomsSelected.filter((room) => room.index != removedArray.index);
-            setRoomsSelected(removedArray);
-        }
+        updateRoomSelection(roomsSelected);
     }, [roomsSelected])
 
     useEffect(() => {
@@ -53,12 +48,20 @@ const Rooms = () => {
         const toDateParam = new Date(decode(router.query.to));
         const guestCount = decode(router.query.guest);
         const roomCount = decode(router.query.rooms);
-        setFromDate(moment(fromDateParam).format("MMM Do"));
-        setToDate(moment(toDateParam).format("MMM Do"));
+        setFromDate(moment(fromDateParam).format("MM-DD-YYYY"));
+        setToDate(moment(toDateParam).format("MM-DD-YYYY"));
         setNumberOfGuest(guestCount);
         setNumberOfRooms(roomCount);
       }
     }, [router]);
+
+    const updateRoomSelection = (roomsSelected) => {
+        if(roomsSelected.length > numberOfRooms){
+            let removedArray = roomsSelected.shift();
+            removedArray = roomsSelected.filter((room) => room.index != removedArray.index);
+            setRoomsSelected(removedArray);
+        }
+    }
 
     const handleRoomSelect = (roomNumber, index) => {
         let updatedRooms;
@@ -70,11 +73,9 @@ const Rooms = () => {
 
         if(isSelected){
             updatedRooms = roomsSelected.filter((room) => room.index !== index);
-            // setRoomsSelected(updatedRooms);
             memoizedUnselectRoomCallback(updatedRooms);
         }else{
-                //Add logic here to check if they have already selected max no of rooms (numberOfRooms) and throw an error/replace previos selection with current
-                memoizedSelectRoomCallback(selectedRooms)
+            memoizedSelectRoomCallback(selectedRooms);
         }
     }
 
@@ -109,7 +110,7 @@ const Rooms = () => {
       <section className="flex flex-row border-b-2 border-gray-200">
         <div className="w-3/4 border-r-2 border-gray-200 pr-6 pb-10">
             <div className="w-full py-6">
-                <RoomSelection roomState={roomState} roomsSelected={roomsSelected} handleRoomSelect={handleRoomSelect} roomNumbers={roomNumbers} numberOfRooms={numberOfRooms} sheetData={sheetData}/>
+                <RoomSelection roomsSelected={roomsSelected} handleRoomSelect={handleRoomSelect} roomNumbers={roomNumbers} numberOfRooms={numberOfRooms} sheetData={sheetData} fromDate={fromDate} toDate={toDate}/>
             </div>
             <div className="">
                 <div id="gallery" className="grid grid-rows-2 grid-cols-3 grid-flow-col gap-4">
