@@ -178,16 +178,14 @@ export default function TripSelector(props) {
             )}
           </div>
         </div>
-        { fromDateObj && toDateObj && numberOfRooms && numberOfGuest && 
-         <Link  href={{ pathname: '/rooms',  query: { from: encode(fromDateObj), to: encode(toDateObj), guest: encode(numberOfGuest), rooms: encode(numberOfRooms) } }}>
-          <a className="bg-black py-2 px-6 rounded-full ml-4">
+        <Link  href={{ pathname: '/rooms',  query: { from: encode(fromDateObj), to: encode(toDateObj), guest: encode(numberOfGuest), rooms: encode(numberOfRooms) } }}>
+          <a className={`${(fromDateObj && toDateObj && numberOfRooms && numberOfGuest) ? "" : "btn-disabled"} btn-primary ml-4`}>
               <img
                 src="arrow-right.svg"
                 className="h-8 w-8"
               />
           </a>
-         </Link>
-        }
+        </Link>
       </div>
     </div>
   );
