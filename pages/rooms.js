@@ -4,7 +4,7 @@ import RoomBilling from '../components/RoomBilling';
 import RoomSelection from '../components/layout/RoomSelection';
 import { useRouter } from 'next/router';
 import { encode, decode } from '../utils';
-import moment from 'moment';
+import moment, { updateLocale } from 'moment';
 import GetSheetDone from 'get-sheet-done';
 
 
@@ -18,7 +18,6 @@ const Rooms = () => {
     const [numberOfRooms, setNumberOfRooms] = useState('');
     const [sheetData, setSheetData] = useState({});
     const [roomsSelected, setRoomsSelected] = useState([]);
-    let [roomsSelectedCount, setRoomsSelectedCount] = useState(0);
     const roomNumbers = [101, 102, 103, 104, 105, 106];
     const roomData = ["Free Parking", "Balcony", "Geyser", "WiFI", "Television", "Heater"];
     const roomPhotos = ["/assets/img/room1-1.jpg", "/assets/img/room1-2.jpg", "/assets/img/room1-3.jpg"];
@@ -127,7 +126,7 @@ const Rooms = () => {
             </div>
         </div>
         <div className="w-1/4 pl-6">
-            <RoomBilling fromDate={fromDate} toDate={toDate} numberOfGuest={numberOfGuest} numberOfRooms={numberOfRooms} sheetData={sheetData} roomsSelected={roomsSelected}/>
+            <RoomBilling fromDate={fromDate} toDate={toDate} numberOfGuest={numberOfGuest} sheetData={sheetData} roomsSelected={roomsSelected}/>
         </div>
       </section>
       <section className="mt-8 pb-20">

@@ -84,7 +84,7 @@ export default function TripSelector(props) {
   return (
     <div className="">
       <div className="flex justify-center items-center">
-        <div className="w-1/2 h-12 px-8 bg-gray-200 rounded-full flex-row flex">
+        <div className="w-auto h-12 px-8 bg-gray-200 rounded-full flex-row flex">
           <div className="flex flex-col w-40">
             <button
               className="btn-date dropdown relative btn-from-date"

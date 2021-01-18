@@ -9,31 +9,32 @@ const doc = new GoogleSpreadsheet(SPREADSHEET_ID);
 
 
 export default async (req, res) => {
-    try{
-        const appendSpreadsheet = async (row) => {
-            try {
-              await doc.useServiceAccountAuth({
-                client_email: CLIENT_EMAIL,
-                private_key: PRIVATE_KEY.replace(/\\n/gm, '\n'),
-              });
-              await doc.loadInfo();
-          
-              const sheet = doc.sheetsById[SHEET_ID];
-              console.log("ROW IS HERE", row);
-              const writeSheet = await sheet.addRow(row);
-              const readSheet = await sheet.getRows();
-              console.log("RESULT IS HERE", readSheet);
-            } catch (e) {
-              console.error('Error: ', e);
-            }
-          };
-          
-          const newRow = { Name: "cool story", Value: "bro" };
-          
-          appendSpreadsheet(newRow);
-          res.send('ok');
+    try {
+      const { selectedRooms, selectedDates } = req.body;
+
+      await doc.useServiceAccountAuth({
+        client_email: CLIENT_EMAIL,
+        private_key: PRIVATE_KEY.replace(/\\n/gm, '\n'),
+      });
+      await doc.loadInfo();
+
+      const sheet = doc.sheetsById[SHEET_ID];
+      const sheetData = await sheet.getRows();
+
+      sheetData && sheetData.map(async (row) => {
+        let datesList = JSON.parse(row.dates);
+        if (selectedRooms && selectedRooms.find((selectedRoom) => selectedRoom.roomNumber == row.room )) {
+          datesList = [...datesList, selectedDates];
+          row.bookings = '' + datesList.length;
+          row.dates = JSON.stringify(datesList); 
+          await row.save();
+        }
+      });
+
+      res.send('ok');
+
     } catch (error) {
-        console.log("ERROR",error);
+        console.log("ERROR", error);
     }
 
 }
