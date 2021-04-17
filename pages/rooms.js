@@ -19,8 +19,10 @@ const Rooms = () => {
     const [sheetData, setSheetData] = useState({});
     const [roomsSelected, setRoomsSelected] = useState([]);
     const roomNumbers = [101, 102, 103, 104, 105, 106];
+    const [carouselIndicators, setCarouselIndicators] = useState(false);
+    const [roomPhotos, setRoomPhotos] = useState(["/assets/img/gallery-1.jpg", "/assets/img/gallery-2.jpg", "/assets/img/gallery-3.jpg", "/assets/img/gallery-4.jpg", "/assets/img/gallery-5.jpg", "/assets/img/gallery-6.jpg", "/assets/img/gallery-7.jpg"]);
     const roomData = ["Free Parking", "Balcony", "Geyser", "WiFI", "Television", "Heater"];
-    const roomPhotos = ["/assets/img/room1-1.jpg", "/assets/img/room1-2.jpg", "/assets/img/room1-3.jpg"];
+    // const roomPhotos = ["/assets/img/gallery-1.jpg", "/assets/img/gallery-2.jpg", "/assets/img/gallery-3.jpg", "/assets/img/gallery-4.jpg", "/assets/img/gallery-5.jpg", "/assets/img/gallery-6.jpg", "/assets/img/gallery-7.jpg"];
     const router = useRouter();
     const memoizedSelectRoomCallback = useCallback(
         (selectedRooms) => {
@@ -94,12 +96,29 @@ const Rooms = () => {
     
     const renderRoomPhotos = roomPhotos.map((roomPhoto, i) => (
         <div 
+            id="photo"
             key={i}
             className={`${i > 0 ? "row-span-1" : "row-span-2 col-span-2"} bg-local bg-cover bg-center rounded`} 
             style={{backgroundImage: 'url(' + roomPhoto + ')'}}
+            onMouseEnter={() => setCarouselIndicators(true)}
+            onMouseLeave={() => setCarouselIndicators(false)}
         >
         </div>
     ))
+
+    const handleCarouselLeft = () => {
+        const carouselArray = roomPhotos;
+        const lastEle = carouselArray.pop();
+        carouselArray.unshift(lastEle);
+        setRoomPhotos([...carouselArray]);
+    }
+
+    const handleCarouselRight = () => {
+        const carouselArray = roomPhotos;
+        const firstEle = carouselArray.shift();
+        carouselArray.push(firstEle);
+        setRoomPhotos([...carouselArray]);
+    }
 
   return (
     <DefaultLayout
@@ -111,9 +130,37 @@ const Rooms = () => {
             <div className="w-full py-6">
                 <RoomSelection roomsSelected={roomsSelected} handleRoomSelect={handleRoomSelect} roomNumbers={roomNumbers} numberOfRooms={numberOfRooms} sheetData={sheetData} fromDate={fromDate} toDate={toDate}/>
             </div>
-            <div className="">
-                <div id="gallery" className="grid grid-rows-2 grid-cols-3 grid-flow-col gap-4">
-                    {renderRoomPhotos}
+            <div className="relative">
+                <div id="gallery">
+                    <div className="grid grid-rows-2 grid-cols-3 grid-flow-col gap-4">
+                        {renderRoomPhotos}
+                    </div>
+                    {carouselIndicators && 
+                        <div 
+                            className="absolute flex flex-row justify-between w-full top-52"
+                            onMouseEnter={() => setCarouselIndicators(true)}
+                            onMouseLeave={() => setCarouselIndicators(false)}
+                        >
+                            <button 
+                                className="btn-secondary" 
+                                onClick={handleCarouselLeft}
+                            >
+                                <img
+                                    src="assets/icons/arrow-left-blk.svg"
+                                    className="h-6 w-6"
+                                />
+                            </button>
+                            <button 
+                                className="btn-secondary" 
+                                onClick={handleCarouselRight}
+                            >
+                                <img
+                                    src="assets/icons/arrow-right-blk.svg"
+                                    className="h-6 w-6"
+                                />
+                            </button>
+                        </div>
+                    }
                 </div>
                 <div className="flex flex-row mt-8">
                     <div className="w-2/3">
