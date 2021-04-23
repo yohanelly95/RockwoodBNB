@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { DefaultLayout } from "../components";
 import RoomBilling from '../components/RoomBilling';
 import RoomSelection from '../components/layout/RoomSelection';
@@ -20,6 +20,7 @@ const Rooms = () => {
     const [roomsSelected, setRoomsSelected] = useState([]);
     const roomNumbers = [101, 102, 103, 104, 105, 106];
     const [carouselIndicators, setCarouselIndicators] = useState(false);
+    const [displayBookingModal, setDisplayBookingModal] = useState(false);
     const [roomPhotos, setRoomPhotos] = useState(["/assets/img/gallery-1.jpg", "/assets/img/gallery-2.jpg", "/assets/img/gallery-3.jpg", "/assets/img/gallery-4.jpg", "/assets/img/gallery-5.jpg", "/assets/img/gallery-6.jpg", "/assets/img/gallery-7.jpg"]);
     const roomData = ["Free Parking", "Balcony", "Geyser", "WiFI", "Television", "Heater"];
     // const roomPhotos = ["/assets/img/gallery-1.jpg", "/assets/img/gallery-2.jpg", "/assets/img/gallery-3.jpg", "/assets/img/gallery-4.jpg", "/assets/img/gallery-5.jpg", "/assets/img/gallery-6.jpg", "/assets/img/gallery-7.jpg"];
@@ -120,7 +121,24 @@ const Rooms = () => {
         setRoomPhotos([...carouselArray]);
     }
 
+
   return (
+      <React.Fragment>
+          {displayBookingModal && 
+        <div className="fixed w-full h-screen bg-gray-50 z-10 flex justify-center items-center">
+            <div className="h-96 w-1/5 p-12 bg-gray-200 rounded-xl text-center">
+                <img src="/assets/icons/green-check.svg" className="w-36 mx-auto"></img>
+                <h2>Your room has <br></br>been booked</h2>
+                <p className="mt-2">You will be contacted soon with confirmation.</p>
+            </div>
+            <p 
+                onClick={() => setDisplayBookingModal(false)}
+                className="absolute right-40 top-40 uppercase py-2 px-4 rounded-full cursor-pointer font-bold opacity-50 hover:bg-gray-200 hover:opacity-100"
+            >
+                close
+            </p>
+        </div>
+    }
     <DefaultLayout
       wrapperClass="container"
       seoTitle="Book rooms | Rockwood BNB"
@@ -173,7 +191,7 @@ const Rooms = () => {
             </div>
         </div>
         <div className="w-1/4 pl-6">
-            <RoomBilling fromDate={fromDate} toDate={toDate} numberOfGuest={numberOfGuest} sheetData={sheetData} roomsSelected={roomsSelected}/>
+            <RoomBilling fromDate={fromDate} toDate={toDate} numberOfGuest={numberOfGuest} sheetData={sheetData} roomsSelected={roomsSelected} setDisplayBookingModal={setDisplayBookingModal}/>
         </div>
       </section>
       <section className="mt-8 pb-20">
@@ -209,6 +227,8 @@ const Rooms = () => {
           </div>
       </section> 
     </DefaultLayout>
+      </React.Fragment>
+    
   );
 }
 
