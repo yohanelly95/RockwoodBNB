@@ -1,7 +1,7 @@
 @import 'react-calendar/dist/Calendar.css';
 
 .date-dropdown {
-  @apply w-96 z-10 left-0 mt-2 rounded-xl shadow-xl;
+  @apply w-min lg:w-96 z-10 left-0 mt-2 rounded-xl shadow-xl;
 }
 
 .guest-rooms-dropdown {
@@ -41,7 +41,7 @@ margin-top: 8px;
 }
 
 .react-calendar {
-  width: 100 !important;
+  width: 100% !important;
   font-family: Poppins, sans-serif !important;
   background-color: #E5E7EB !important;
   border: none !important;

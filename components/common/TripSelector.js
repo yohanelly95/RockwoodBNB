@@ -99,8 +99,8 @@ export default function TripSelector(props) {
   return (
     <div className="">
       <div className="flex justify-center items-center">
-        <div className="w-auto h-12 px-8 bg-gray-200 rounded-full flex-row flex">
-          <div className="flex flex-col w-min lg:w-40">
+        <div className="w-full lg:w-auto h-12 px-8 bg-gray-200 rounded-full flex-row flex text-xs lg:text-lg">
+          <div className="flex flex-col w-16 lg:w-40">
             <button
               className="btn-date dropdown relative btn-from-date"
               onClick={toggleFromPopOver}
@@ -120,7 +120,7 @@ export default function TripSelector(props) {
               </Popover>
             )}
           </div>
-          <div className="flex flex-col w-min lg:w-40">
+          <div className="flex flex-col w-16 lg:w-40">
             <button
               className="btn-date dropdown relative btn-to-date"
               onClick={toggleToPopOver}
@@ -140,7 +140,7 @@ export default function TripSelector(props) {
               </Popover>
             )}
           </div>
-          <div className="flex flex-col w-min lg:w-32">
+          <div className="flex flex-col w-16 lg:w-32">
             <button
               className="btn-guest-room dropdown relative btn-guest"
               onClick={toggleGuestPopover}
@@ -164,7 +164,7 @@ export default function TripSelector(props) {
               </Popover>
             )}
           </div>
-          <div className="flex flex-col w-min lg:w-32">
+          <div className="flex flex-col w-16 lg:w-32">
             <button
               className="btn-guest-room dropdown relative btn-rooms"
               onClick={toggleRoomPopover}
