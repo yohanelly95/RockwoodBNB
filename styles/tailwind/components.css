@@ -40,11 +40,11 @@
 
 
 .btn-date {
-  @apply py-3 w-40 uppercase text-left flex items-center justify-between;
+  @apply py-3 w-full lg:w-40 uppercase text-left flex items-center justify-between;
 }
 
 .btn-guest-room {
-  @apply py-3 w-32 uppercase text-left flex items-center justify-between;
+  @apply py-3 w-full lg:w-32 uppercase text-left flex items-center justify-between;
 }
 
 .btn-date:focus {
@@ -143,6 +143,10 @@
         width: auto;
         margin-left: -195px;
     }
+  .chevron{
+    width: 16px;
+    margin-right: 16px;
+  }
 }
 
 

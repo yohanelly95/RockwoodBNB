@@ -88,7 +88,7 @@ const Rooms = () => {
     const renderRoomData = roomData.map((roomDataItem, i) => (
         <div 
             key={roomDataItem} 
-            className={`w-1/2 h-8 pr-3 flex items-center ${i > 1 ? "mt-4" : ""}`}
+            className={`w-auto md:w-1/2 lg:w-1/2 h-8 pr-3 flex items-center ${i > 1 ? "mt-4" : ""}`}
         >
             <div className="w-8 h-8 m-0"><img src={`/assets/icons/${i+1}.svg`}></img></div>
             <p className="ml-2">{roomDataItem}</p>
@@ -143,8 +143,8 @@ const Rooms = () => {
       wrapperClass="container"
       seoTitle="Book rooms | Rockwood BNB"
     >
-      <section className="flex flex-row border-b-2 border-gray-200">
-        <div className="w-3/4 border-r-2 border-gray-200 pr-6 pb-10">
+      <section className="flex lg:flex-row flex-column border-b-2 border-gray-200">
+        <div className="w-screen lg:w-3/4 border-r-2 border-gray-200 pr-6 pb-10">
             <div className="w-full py-6">
                 <RoomSelection roomsSelected={roomsSelected} handleRoomSelect={handleRoomSelect} roomNumbers={roomNumbers} numberOfRooms={numberOfRooms} sheetData={sheetData} fromDate={fromDate} toDate={toDate}/>
             </div>
@@ -209,7 +209,7 @@ const Rooms = () => {
             <div className="w-1/3">
                 <h3>Additional Rules</h3>
                 <ol className="w-2/3 ml-5 mt-4 list-disc list-outside">
-                    <li><p>If you are returning home after dark, make sure you have a working flashlift to help you see the path</p></li>
+                    <li><p>If you are returning home after dark, make sure you have a working flashlight to help you see the path</p></li>
                     <li><p>You are allowed to smoke outside the house, in the balcony</p></li>
                     <li><p>Please leave your shoes on the shoe rack provided</p></li>
                     <li><p>Heaters provided @ Rs 100/night for winters</p></li>

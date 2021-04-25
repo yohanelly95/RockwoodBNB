@@ -123,7 +123,7 @@ const RoomBilling = (props) => {
                     <p className="mt-2">Extra Bedding x <span>{extraBedding}</span><span className="float-right">₹<span>{totalBedsAmount}</span></span></p>
                     <Counter counter={extraBedding} setCounter={setExtraBedding}/>
                     <p className="mt-4 font-bold">Total<span className="float-right">₹<span>{totalInvoiceAmount ? totalInvoiceAmount : '...'}</span></span></p>
-                    <button className="btn-primary btn-fw mt-12 font-bold" onClick={handleBooking}>BOOK</button>
+                    <button className="btn-primary btn-fw mt-12 font-bold" disabled={roomsSelected.length == 0} onClick={handleBooking}>BOOK</button>
                     <p className="text-center w-full mt-4">You won't be charged yet</p>
                 </div>
             </div>
