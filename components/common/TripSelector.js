@@ -56,6 +56,10 @@ export default function TripSelector(props) {
       setIsToPopoverOpen((isToPopoverOpen) => !isToPopoverOpen);
     } else if(value === 'to'){
       setIsToPopoverOpen((isToPopoverOpen) => !isToPopoverOpen);
+      setIsGuestPopoverOpen((isGuestPopoverOpen) => !isGuestPopoverOpen);
+    } else if(value === 'guest'){
+      setIsGuestPopoverOpen(false);
+      setIsRoomPopoverOpen(true);
     }
   }
 
@@ -77,6 +81,17 @@ export default function TripSelector(props) {
     let minRoomsRequired = Math.ceil(value/2);
     const minRoomArr = roomsArr.filter((room) => room >= minRoomsRequired);
     setMinRoomsReq(minRoomArr);
+    toggleNextPopover('guest');
+  }
+
+  const handleGuestSelection = (value) => {
+    toggleNextPopover('guest');
+    calculateRooms(value);
+  }
+
+  const handleRoomSelection = (value) => {
+    setIsRoomPopoverOpen(false);
+    setNumberOfRooms(value);
   }
 
   const { isNav } = props;
@@ -84,8 +99,8 @@ export default function TripSelector(props) {
   return (
     <div className="">
       <div className="flex justify-center items-center">
-        <div className="w-1/2 h-12 px-8 bg-gray-200 rounded-full flex-row flex">
-          <div className="flex flex-col w-40">
+        <div className="w-full lg:w-auto h-12 px-8 bg-gray-200 rounded-full flex-row flex text-xs lg:text-lg">
+          <div className="flex flex-col w-16 lg:w-40">
             <button
               className="btn-date dropdown relative btn-from-date"
               onClick={toggleFromPopOver}
@@ -105,7 +120,7 @@ export default function TripSelector(props) {
               </Popover>
             )}
           </div>
-          <div className="flex flex-col w-40">
+          <div className="flex flex-col w-16 lg:w-40">
             <button
               className="btn-date dropdown relative btn-to-date"
               onClick={toggleToPopOver}
@@ -125,7 +140,7 @@ export default function TripSelector(props) {
               </Popover>
             )}
           </div>
-          <div className="flex flex-col w-32">
+          <div className="flex flex-col w-16 lg:w-32">
             <button
               className="btn-guest-room dropdown relative btn-guest"
               onClick={toggleGuestPopover}
@@ -143,13 +158,13 @@ export default function TripSelector(props) {
               >
               <ul>
                 {guestArr.map((value, index) => {
-                  return <li className="guest-room-list" key={index} onClick={(e) => calculateRooms(value)}>{value}</li>
+                  return <li className="guest-room-list" key={index} onClick={(e) => handleGuestSelection(value)}>{value}</li>
                 })}
               </ul>
               </Popover>
             )}
           </div>
-          <div className="flex flex-col w-32">
+          <div className="flex flex-col w-16 lg:w-32">
             <button
               className="btn-guest-room dropdown relative btn-rooms"
               onClick={toggleRoomPopover}
@@ -167,10 +182,10 @@ export default function TripSelector(props) {
               >
               <ul>
                 {minRoomsReq.length > 0 ? minRoomsReq.map((value, index) => {
-                  return <li className="guest-room-list" key={index} onClick={() => setNumberOfRooms(value)}>{value}</li>
+                  return <li className="guest-room-list" key={index} onClick={() => handleRoomSelection(value)}>{value}</li>
                 }) :
                 roomsArr.map((value, index) => {
-                  return <li className="guest-room-list" key={index} onClick={() => setNumberOfRooms(value)}>{value}</li>
+                  return <li className="guest-room-list" key={index} onClick={() => handleRoomSelection(value)}>{value}</li>
                 })
                 }
               </ul>
@@ -178,16 +193,14 @@ export default function TripSelector(props) {
             )}
           </div>
         </div>
-        { fromDateObj && toDateObj && numberOfRooms && numberOfGuest && 
-         <Link  href={{ pathname: '/rooms',  query: { from: encode(fromDateObj), to: encode(toDateObj), guest: encode(numberOfGuest), rooms: encode(numberOfRooms) } }}>
-          <a className="bg-black py-2 px-6 rounded-full ml-4">
+        <Link  href={{ pathname: '/rooms',  query: { from: encode(fromDateObj), to: encode(toDateObj), guest: encode(numberOfGuest), rooms: encode(numberOfRooms) } }}>
+          <a className={`${(fromDateObj && toDateObj && numberOfRooms && numberOfGuest) ? "" : "btn-disabled"} btn-primary ml-4`}>
               <img
                 src="arrow-right.svg"
                 className="h-8 w-8"
               />
           </a>
-         </Link>
-        }
+        </Link>
       </div>
     </div>
   );

@@ -8,10 +8,10 @@ import TripSelector from './TripSelector'
 
 export default function Nav() {
   return (
-    <nav className="flex h-24 border-b-2 border-gray-200">
+    <nav className="flex h-24 border-b-2 border-gray-200 py-6">
       <Link href="/">
         <img
-          className="cursor-pointer"
+          className="cursor-pointer h-12 "
           src="/assets/img/logo-sm.svg"
           alt="logo"
         />

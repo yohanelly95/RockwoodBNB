@@ -18,8 +18,11 @@ module.exports = {
       width: {
         '96': '24rem',
         '128': '32rem',
-      }
-    },
+      },
+      backgroundImage: theme => ({
+        'homepage-hero': "url('../public/assets/img/bg.jpg')"
+      })
+    }
   },
   variants: {},
   plugins: [],
