@@ -22,7 +22,7 @@
   @apply rounded-full border-2 border-black bg-black py-4 w-full text-white text-sm;
 }
 .btn-secondary {
-  @apply rounded-full border-2 border-gray-400 py-1 px-6 text-gray-600 text-sm transition duration-200;
+  @apply rounded-full border-2 border-gray-400 py-1 px-6 text-gray-600 text-sm transition duration-200 bg-white;
 }
 
 .btn-secondary:hover {
@@ -74,8 +74,12 @@
   height: 450px;
 }
 
-#gallery > div {
+/* #gallery > div {
   height: 217px;
+} */
+
+#photo:nth-child(n+4) {
+  display: none;
 }
 
 #gallery > div > img{

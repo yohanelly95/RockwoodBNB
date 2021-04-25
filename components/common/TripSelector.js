@@ -56,6 +56,10 @@ export default function TripSelector(props) {
       setIsToPopoverOpen((isToPopoverOpen) => !isToPopoverOpen);
     } else if(value === 'to'){
       setIsToPopoverOpen((isToPopoverOpen) => !isToPopoverOpen);
+      setIsGuestPopoverOpen((isGuestPopoverOpen) => !isGuestPopoverOpen);
+    } else if(value === 'guest'){
+      setIsGuestPopoverOpen(false);
+      setIsRoomPopoverOpen(true);
     }
   }
 
@@ -77,6 +81,17 @@ export default function TripSelector(props) {
     let minRoomsRequired = Math.ceil(value/2);
     const minRoomArr = roomsArr.filter((room) => room >= minRoomsRequired);
     setMinRoomsReq(minRoomArr);
+    toggleNextPopover('guest');
+  }
+
+  const handleGuestSelection = (value) => {
+    toggleNextPopover('guest');
+    calculateRooms(value);
+  }
+
+  const handleRoomSelection = (value) => {
+    setIsRoomPopoverOpen(false);
+    setNumberOfRooms(value);
   }
 
   const { isNav } = props;
@@ -143,7 +158,7 @@ export default function TripSelector(props) {
               >
               <ul>
                 {guestArr.map((value, index) => {
-                  return <li className="guest-room-list" key={index} onClick={(e) => calculateRooms(value)}>{value}</li>
+                  return <li className="guest-room-list" key={index} onClick={(e) => handleGuestSelection(value)}>{value}</li>
                 })}
               </ul>
               </Popover>
@@ -167,10 +182,10 @@ export default function TripSelector(props) {
               >
               <ul>
                 {minRoomsReq.length > 0 ? minRoomsReq.map((value, index) => {
-                  return <li className="guest-room-list" key={index} onClick={() => setNumberOfRooms(value)}>{value}</li>
+                  return <li className="guest-room-list" key={index} onClick={() => handleRoomSelection(value)}>{value}</li>
                 }) :
                 roomsArr.map((value, index) => {
-                  return <li className="guest-room-list" key={index} onClick={() => setNumberOfRooms(value)}>{value}</li>
+                  return <li className="guest-room-list" key={index} onClick={() => handleRoomSelection(value)}>{value}</li>
                 })
                 }
               </ul>
