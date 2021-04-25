@@ -19,5 +19,6 @@ module.exports = {
       GSHEET_ID: process.env.GSHEET_ID,
       GCLIENT_EMAIL: process.env.GCLIENT_EMAIL,
       GPRIVATE_KEY: process.env.GPRIVATE_KEY
-    }
+    },
+    distDir: 'build'
   };
