@@ -1,9 +1,9 @@
 const { GoogleSpreadsheet } = require('google-spreadsheet');
 // Config variables
-const SPREADSHEET_ID = process.env.GSPREADSHEET_ID;
-const SHEET_ID = process.env.GSHEET_ID || '0';
-const CLIENT_EMAIL = process.env.GCLIENT_EMAIL;
-const PRIVATE_KEY = process.env.GPRIVATE_KEY;
+const SPREADSHEET_ID = process.env.NEXT_PUBLIC_GSPREADSHEET_ID;
+const SHEET_ID = process.env.NEXT_PUBLIC_GSHEET_ID || '0';
+const CLIENT_EMAIL = process.env.NEXT_PUBLIC_GCLIENT_EMAIL;
+const PRIVATE_KEY = process.env.NEXT_PUBLIC_GPRIVATE_KEY;
 
 const doc = new GoogleSpreadsheet(SPREADSHEET_ID);
 
