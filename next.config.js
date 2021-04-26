@@ -15,10 +15,10 @@ module.exports = {
       return config;
     },
     env: {
-      GSPREADSHEET_ID: process.env.GSPREADSHEET_ID,
-      GSHEET_ID: process.env.GSHEET_ID,
-      GCLIENT_EMAIL: process.env.GCLIENT_EMAIL,
-      GPRIVATE_KEY: process.env.GPRIVATE_KEY
+      NEXT_PUBLIC_GSPREADSHEET_ID: process.env.NEXT_PUBLIC_GSPREADSHEET_ID,
+      NEXT_PUBLIC_GSHEET_ID: process.env.NEXT_PUBLIC_GSHEET_ID,
+      NEXT_PUBLIC_GCLIENT_EMAIL: process.env.NEXT_PUBLIC_GCLIENT_EMAIL,
+      NEXT_PUBLIC_GPRIVATE_KEY: process.env.NEXT_PUBLIC_GPRIVATE_KEY
     },
     distDir: 'build'
   };
